@@ -8,7 +8,7 @@ import prisma from '@/app/lib/prima';
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     pages: {
-        signIn: '/auth/signin',
+        signIn: '/',
     },
     secret: process.env.NEXTAUTH_SECRET as string,
     providers: [

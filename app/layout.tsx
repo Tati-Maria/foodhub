@@ -1,5 +1,8 @@
+import Container from './components/containers/Container'
+import NavBar from './components/nav/NavBar'
 import './globals.css'
 import { Urbanist } from 'next/font/google'
+import Provider from './providers/provider'
 
 const urban = Urbanist({ subsets: ['latin'] })
 
@@ -23,7 +26,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={urban.className}>{children}</body>
+      <body className={urban.className}>
+        <Provider>
+          <Container>
+            <NavBar />
+            <main
+            className='min-h-screen py-10'
+            >
+              {children}
+            </main>
+          </Container>
+        </Provider>
+      </body>
     </html>
   )
 }
