@@ -7,16 +7,20 @@ const darker = Darker_Grotesque({
     subsets: ['latin-ext']
 })
 
-const Logo = () => {
+interface Props {
+  className?: string
+}
+
+const Logo = ({className}: Props) => {
   return (
     <Link href={'/'}
-    className='flex items-center justify-center space-x-2'
+    className={`flex items-center justify-center space-x-2`}
     >
         <MdFastfood
         className={`text-2xl text-red-500`} 
         />
         <span
-        className={`text-xl font-bold text-gray-800 ${darker} sm:text-2xl`}
+        className={`text-xl font-bold text-gray-800 ${darker} sm:text-2xl ${className}`}
         >
             Foodhub
         </span>
