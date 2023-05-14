@@ -3,6 +3,7 @@ import NavBar from './components/nav/NavBar'
 import './globals.css'
 import { Urbanist } from 'next/font/google'
 import Provider from './providers/provider'
+import Footer from './components/footer/Footer'
 
 const urban = Urbanist({ subsets: ['latin'] })
 
@@ -25,17 +26,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className='bg-white'>
       <body className={urban.className}>
         <Provider>
           <Container>
             <NavBar />
             <main
-            className='min-h-screen py-10'
+            className='min-h-screen py-10 relative'
             >
               {children}
             </main>
           </Container>
+          <Footer />
         </Provider>
       </body>
     </html>
