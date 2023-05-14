@@ -1,0 +1,157 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+
+  accounts   Account[]
+  sessions   Session[]
+  menuItems  MenuItem[]  @relation("UserMenuItems")
+  menus      Menu[]      @relation("UserMenus")
+  resturants Resturant[] @relation("UserResturants")
+  reviews    Review[]    @relation("UserReviews")
+  orders     Order[]     @relation("UserOrders")
+  cartItems  CartItem[]  @relation("UserCartItems")
+  carts      Cart[]      @relation("UserCart")
+
+  @@unique([id, email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+//Restaurants Model
+
+model Resturant {
+  id          String     @id @default(uuid())
+  name        String
+  description String
+  image       String
+  address     String
+  website     String
+  phone       String
+  hours       String
+  rating      Float      @default(0) // 0 - 5
+  priceRange  String     @default("$") // $ - $$$$
+  owner       User       @relation("UserResturants", fields: [ownerId], references: [id])
+  ownerId     String
+  menuItems   MenuItem[] @relation("ResturantMenuItems")
+  menus       Menu[]     @relation("ResturantMenus")
+  reviews     Review[]   @relation("ResturantReviews")
+  orders      Order[]    @relation("ResturantOrders")
+}
+
+model Menu {
+  id          String     @id @default(uuid())
+  name        String
+  description String
+  image       String
+  menuItems   MenuItem[] @relation("MenuItems")
+  user        User       @relation("UserMenus", fields: [userId], references: [id])
+  userId      String
+  resturant   Resturant  @relation("ResturantMenus", fields: [resturantId], references: [id])
+  resturantId String
+}
+
+model MenuItem {
+  id          String     @id @default(uuid())
+  name        String
+  description String
+  image       String
+  price       Decimal    @default(0)
+  menu        Menu       @relation("MenuItems", fields: [menuId], references: [id])
+  resturant   Resturant  @relation("ResturantMenuItems", fields: [resturantId], references: [id])
+  resturantId String
+  menuId      String
+  user        User       @relation("UserMenuItems", fields: [userId], references: [id])
+  userId      String
+  cartItems   CartItem[] @relation("OrderItems")
+}
+
+model Review {
+  id          String    @id @default(uuid())
+  title       String
+  body        String
+  rating      Float     @default(0) // 0 - 5
+  resturant   Resturant @relation("ResturantReviews", fields: [resturantId], references: [id])
+  resturantId String
+  user        User      @relation("UserReviews", fields: [userId], references: [id])
+  userId      String
+}
+
+model Order {
+  id          String     @id @default(uuid())
+  total       Decimal    @default(0)
+  resturant   Resturant  @relation("ResturantOrders", fields: [resturantId], references: [id])
+  resturantId String
+  user        User       @relation("UserOrders", fields: [userId], references: [id])
+  userId      String
+  items       CartItem[] @relation("OrderItems")
+}
+
+model CartItem {
+  id         String   @id @default(uuid())
+  quantity   Int      @default(1)
+  user       User     @relation("UserCartItems", fields: [userId], references: [id])
+  userId     String
+  cart       Cart     @relation("CartItems", fields: [cartId], references: [id])
+  cartId     String
+  order      Order    @relation("OrderItems", fields: [orderId], references: [id])
+  orderId    String
+  menuItem   MenuItem @relation("OrderItems", fields: [menuItemId], references: [id])
+  menuItemId String
+}
+
+model Cart {
+  id     String     @id @default(uuid())
+  total  Decimal    @default(0)
+  items  CartItem[] @relation("CartItems")
+  user   User       @relation("UserCart", fields: [userId], references: [id])
+  userId String     @unique
+}
