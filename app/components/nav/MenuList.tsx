@@ -57,14 +57,14 @@ const MenuList = () => {
       type="button"
       text="Sign Out"
       onClick={() => signOut()}
-      className="text-red-500 w-full text-xl font-bold px-2 py-1 rounded-md hover:bg-gray-100 transition duration-200 ease-in-out"
+      className="text-red-500 w-full font-medium text-base md:text-lg px-2 py-1 rounded-md hover:bg-gray-100 transition duration-200 ease-in-out"
       />
     ) : (
       <Button
       type="button"
       text="Sign In"
       onClick={openModal}
-      className="w-full text-xl font-bold text-gray-800 px-2 py-1 rounded-md hover:bg-gray-100 transition duration-200 ease-in-out"
+      className="w-full text-base md:text-lg font-medium text-gray-800 px-2 py-1 rounded-md hover:bg-gray-100 transition duration-200 ease-in-out"
       />
     )}
     {isOpen && <LoginModal onClose={closeModal} />}

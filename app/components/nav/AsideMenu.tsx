@@ -21,7 +21,7 @@ const AsideMenu = () => {
           type="button"
           onClick={closeSideBar}
           icon={FaTimes}
-          className="p-0 text-2xl md:text-3xl hover:text-red-500" 
+          className="p-0 text-xl hover:text-red-500" 
           />
         </div>
         <MenuList />
