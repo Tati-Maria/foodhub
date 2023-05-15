@@ -2,3 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Aside Nav Bar */
+.aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transform: translate(-250px, 0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.aside.active {
+    transform: translate(0, 0);
+}
+

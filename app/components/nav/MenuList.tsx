@@ -1,17 +1,74 @@
+'use client'
+import LoginModal from "../auth/LoginModal"
+import { signOut, useSession } from "next-auth/react"
 import MenuItem from "./MenuItem"
+import {AiOutlineHome} from "react-icons/ai"
+import { GrRestaurant } from "react-icons/gr"
+import {IoRestaurant} from "react-icons/io5"
+import {FiHelpCircle} from "react-icons/fi"
+import {CgProfile} from "react-icons/cg"
+import { useSideBar } from "@/app/store/useSideBar"
+import Button from "../ui/Button"
+import {useLoginModal} from "@/app/store/useLoginModal"
 
+//part of sidebar
 
 const MenuList = () => {
+  const {status} = useSession();
+  const {closeSideBar} = useSideBar();
+  const {isOpen, openModal,closeModal} = useLoginModal();
 
   return (
-    <ul
-    className="hidden lg:flex items-center justify-between space-x-4"
-    >
-        <MenuItem text="Home" route="/" />
-        <MenuItem text="Restaurants" route="/restaurants" />
-        <MenuItem text="About" route="/about" />
-        <MenuItem text="Contact" route="/contact" />
+    <>
+      <ul
+      className="flex flex-col items-start space-y-4 w-full my-6"
+      >
+        <MenuItem 
+        text="Home" 
+        route="/"
+        icon={AiOutlineHome}
+        closeMenu={closeSideBar}
+        />
+        <MenuItem 
+        text="Restaurants" 
+        route="/restaurants"
+        icon={IoRestaurant} 
+        />
+        <MenuItem 
+        text="About" 
+        route="/about"
+        icon={GrRestaurant}
+        />
+        <MenuItem 
+        text="Help" 
+        route="/help"
+        icon={FiHelpCircle}
+        />
+        {status === "authenticated" && (
+          <MenuItem
+          text="Profile"
+          route="/profile"
+          icon={CgProfile}
+          />
+        )}
     </ul>
+    {status === "authenticated" ? (
+      <Button
+      type="button"
+      text="Sign Out"
+      onClick={() => signOut()}
+      className="text-red-500 w-full text-xl font-bold px-2 py-1 rounded-md hover:bg-gray-100 transition duration-200 ease-in-out"
+      />
+    ) : (
+      <Button
+      type="button"
+      text="Sign In"
+      onClick={openModal}
+      className="w-full text-xl font-bold text-gray-800 px-2 py-1 rounded-md hover:bg-gray-100 transition duration-200 ease-in-out"
+      />
+    )}
+    {isOpen && <LoginModal onClose={closeModal} />}
+    </>
   )
 }
 

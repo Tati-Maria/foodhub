@@ -1,37 +1,38 @@
 'use client'
-import LoginModal from "../auth/LoginModal"
-import { signOut, useSession } from "next-auth/react"
-import useLoginModal from "@/app/store/useLoginModal"
-import Logo from "./Logo"
-import MenuList from "./MenuList"
-import Button from "../ui/Button"
+import Logo from "./Logo";
+import Button from "../ui/Button";
+import { useSideBar } from "@/app/store/useSideBar";
+import {FaBars} from "react-icons/fa";
+import AsideMenu from "./AsideMenu";
+import {BsFillBasket2Fill} from "react-icons/bs";
+import { useOpenCart } from "@/app/store/useOpenCart";
 
 const NavBar = () => {
-  const {data: session, status} = useSession();
-  const {isOpen, openModal, closeModal} = useLoginModal();
+  const {open, openSideBar, closeSideBar} = useSideBar();
+  const {cart, openCart, closeCart} = useOpenCart();
 
   return (
     <nav
     className="flex items-center justify-between py-4"
     >
         <Logo />
-        <MenuList />
-        {status === 'authenticated' ? (
+        <div
+        className="flex items-center"
+        >
           <Button
-          className="border border-red-500 text-red-500 py-2 px-4 rounded hover:shadow-md transition-shadow"
-          type='button'
-          text='Logout'
-          onClick={() => signOut()}
+          type="button"
+          onClick={cart ? closeCart : openCart}
+          icon={BsFillBasket2Fill}
+          className="p-0 text-2xl md:text-3xl hover:text-red-500"
           />
-        ) : (
           <Button
-          className="border border-gray-800 py-2 px-4 rounded hover:shadow-md transition-shadow"
-          type='button'
-          text='Login'
-          onClick={openModal}
+          type="button"
+          onClick={open ? closeSideBar : openSideBar}
+          icon={FaBars}
+          className="p-0 text-2xl md:text-3xl hover:text-red-500" 
           />
-        )}
-        {isOpen && <LoginModal onClose={closeModal} />}
+        </div>
+        {open && <AsideMenu />}
     </nav>
   )
 }
