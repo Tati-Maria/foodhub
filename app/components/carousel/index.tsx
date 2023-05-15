@@ -25,11 +25,11 @@ const options: Options = {
             gap: "20px"
         }
     },
-    // autoplay: true,
-    // interval: 3000,
-    // pauseOnHover: true,
+    autoplay: true,
+    interval: 3000,
+    pauseOnHover: true,
     arrows: true,
-    // rewind: true,
+    rewind: true,
 }
 
 interface CarouselProps {
