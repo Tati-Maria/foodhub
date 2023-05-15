@@ -1,7 +1,6 @@
-import {Baskervville} from "next/font/google";
+import {Outfit} from "next/font/google";
 
-const baskervville = Baskervville({
-    weight: ['400'],
+const outfit = Outfit({
     subsets: ['latin']
 })
 
@@ -13,7 +12,7 @@ interface TitleProps {
 const Title = ({className="", title}: TitleProps) => {
   return (
     <h2
-    className={`mb-3 text-2xl font-semibold ${baskervville.className}  ${className}`}
+    className={`mb-3 text-2xl font-bold ${outfit.className}  ${className}`}
     >
         {title}
     </h2>

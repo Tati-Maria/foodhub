@@ -2,22 +2,21 @@
 import { SafeRestaurant } from "@/app/types";
 import {Options, Splide, SplideSlide} from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
-import { useEffect, useState } from "react";
 import RestaurantCard from "../resturants/RestaurantCard";
 
 const options: Options = {
     pagination: false,
-    perPage: 3,
+    perPage: 4,
     gap: "1rem",
     breakpoints: {
         768: {
             //tablet
-            perPage: 2,
+            perPage: 3,
             gap: "1rem"
         },
         568: {
             //mobile landscape
-            perPage: 1,
+            perPage: 2,
             gap: "20px"
         },
         480: {
