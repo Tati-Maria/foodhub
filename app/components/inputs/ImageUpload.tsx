@@ -33,7 +33,7 @@ const ImageUpload = ({onUpload, value, htmlFor, label}: ImageUploadProps) => {
                 {label}
             </label>
             <CldUploadButton
-            uploadPreset="skhk8wcu"
+            uploadPreset="fvi7whwb"
             onUpload={handleUpload}
             options={{
                 maxFiles: 1,
@@ -41,12 +41,11 @@ const ImageUpload = ({onUpload, value, htmlFor, label}: ImageUploadProps) => {
                 clientAllowedFormats: ['png', 'jpeg', 'jpg'],
                 maxFileSize: 1000000,
             }}>
-                <button
-                type="button"
+                <div
                 className={`flex flex-col items-center justify-center space-y-2 ${value ? "text-green-500": "text-gray-500"}`}
                 >
-                    {value ? (<AiOutlineCheckCircle size={20} />) : (<TbPhotoPlus size={20} />)}
-                </button>
+                    {value ? (<AiOutlineCheckCircle size={25} />) : (<TbPhotoPlus size={25} />)}
+                </div>
             </CldUploadButton>
         </div>
     )

@@ -5,7 +5,8 @@ import { restaurantSchema } from "./schema/restaurantSchema"
 import { useCallback } from "react"
 import axios from "axios";
 import {toast} from "react-hot-toast";
-import { redirect } from "next/navigation"
+import { NextResponse } from "next/server"
+
 
 export const useRestaurant = () => {
     const {register, handleSubmit, formState: {errors, isSubmitting}, watch, reset, setValue} = useForm<Restaurant>({
@@ -47,7 +48,7 @@ export const useRestaurant = () => {
             if (response.status === 201) {
                 toast.success("Restaurant added successfully");
                 reset();
-                redirect("/restaurants");
+                NextResponse.redirect("http://localhost:3000/restaurants");
             } else {
                 toast.error("Something went wrong");
             }
