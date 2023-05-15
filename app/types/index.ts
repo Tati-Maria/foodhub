@@ -1,8 +1,10 @@
-import { restaurantSchema } from "../hooks/schema/restaurantSchema";
+import { menuSchema, restaurantSchema, reviewSchema } from "../hooks/schema/restaurantSchema";
 import { z } from "zod";
 import { Restaurant as Restaurants, Menu, MenuItem, User, Review, Order } from "@prisma/client";
 
 export type Restaurant = z.infer<typeof restaurantSchema>;
+export type Menus = z.infer<typeof menuSchema>;
+export type Reviews = z.infer<typeof reviewSchema>;
 
 export type SafeUser = Omit<User, "createdAt" | "updatedAt" | "emailVerified"> & {   
     id: string;

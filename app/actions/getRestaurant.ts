@@ -13,7 +13,6 @@ export async function getRestaurant(params: IParams) {
             },
             include: {
                 menus: true,
-                menuItems: true,
                 reviews: true,
             }
         });
@@ -23,10 +22,6 @@ export async function getRestaurant(params: IParams) {
             menus: restaurant?.menus.map((menu) => ({
                 ...menu,
                 restaurant: restaurant.id,
-            })),
-            menuItems: restaurant?.menuItems.map((menuItem) => ({
-                ...menuItem,
-                restaurant: restaurant?.id,
             })),
             reviews: restaurant?.reviews.map((review) => ({
                 ...review,

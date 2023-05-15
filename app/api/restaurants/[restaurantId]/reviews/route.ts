@@ -2,7 +2,7 @@ import prisma from "@/app/lib/prima";
 import { getCurrentUser } from "@/app/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request, {params}: {params: {id: string}}) {
+export async function POST(request: Request, {params}: {params: {restaurantId: string}}) {
     const currentUser = await getCurrentUser();
 
     if(!currentUser) {
@@ -14,8 +14,16 @@ export async function POST(request: Request, {params}: {params: {id: string}}) {
     const review = await prisma.review.create({
         data: {
             ...json,
-            restaurantId: params.id,
-            userId: currentUser.id,
+            user: {
+                connect: {
+                    id: currentUser.id,
+                }
+            },
+            restaurant: {
+                connect: {
+                    id: params.restaurantId,
+                }
+            },
             rating: Number(json.rating),
         }
     });

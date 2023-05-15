@@ -81,7 +81,6 @@ model Restaurant {
   priceRange  String     @default("$") // $ - $$$$
   owner       User       @relation("UserRestaurants", fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId     String
-  menuItems   MenuItem[] @relation("RestaurantMenuItems")
   menus       Menu[]     @relation("RestaurantMenus")
   reviews     Review[]   @relation("RestaurantReviews")
   orders      Order[]    @relation("RestaurantOrders")
@@ -91,12 +90,11 @@ model Menu {
   id          String     @id @default(uuid())
   name        String
   description String
-  image       String
   menuItems   MenuItem[] @relation("MenuItems")
   user        User       @relation("UserMenus", fields: [userId], references: [id], onDelete: Cascade)
   userId      String
-  resturant   Restaurant  @relation("RestaurantMenus", fields: [resturantId], references: [id], onDelete: Cascade)
-  resturantId String
+  restaurant   Restaurant  @relation("RestaurantMenus", fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String
 }
 
 model MenuItem {
@@ -107,8 +105,6 @@ model MenuItem {
   price       Decimal    @default(0)
   menu        Menu       @relation("MenuItems", fields: [menuId], references: [id], onDelete: Cascade)
   menuId      String
-  resturant   Restaurant  @relation("RestaurantMenuItems", fields: [resturantId], references: [id], onDelete: Cascade)
-  resturantId String
   user        User       @relation("UserMenuItems", fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   cartItems   CartItem[] @relation("OrderItems")
@@ -119,8 +115,8 @@ model Review {
   title       String
   body        String
   rating      Float     @default(0) // 0 - 5
-  resturant   Restaurant @relation("RestaurantReviews", fields: [resturantId], references: [id], onDelete: Cascade)
-  resturantId String
+  restaurant   Restaurant @relation("RestaurantReviews", fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String
   user        User      @relation("UserReviews", fields: [userId], references: [id], onDelete: Cascade)
   userId      String
 }
@@ -128,8 +124,8 @@ model Review {
 model Order {
   id          String     @id @default(uuid())
   total       Decimal    @default(0)
-  resturant   Restaurant  @relation("RestaurantOrders", fields: [resturantId], references: [id], onDelete: Cascade)
-  resturantId String
+  restaurant   Restaurant  @relation("RestaurantOrders", fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String
   user        User       @relation("UserOrders", fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   items       CartItem[] @relation("OrderItems")

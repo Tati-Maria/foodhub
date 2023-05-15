@@ -5,7 +5,6 @@ export async function getRestaurants() {
         include: {
             menus: true,
             orders: true,
-            menuItems: true,
             owner: true,
         },
         orderBy: {
@@ -21,10 +20,6 @@ export async function getRestaurants() {
         })),
         orders: restaurant.orders.map((order) => ({
             ...order,
-            restaurant: restaurant.id,
-        })),
-        menuItems: restaurant.menuItems.map((menuItem) => ({
-            ...menuItem,
             restaurant: restaurant.id,
         })),
         owner: restaurant.owner.id,

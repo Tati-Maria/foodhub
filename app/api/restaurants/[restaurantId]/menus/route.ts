@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 import { getCurrentUser } from "@/app/actions/getCurrentUser";
 
 
-export async function POST(request: Request, {params}: {params: {id: string}}) {
+export async function POST(request: Request, {params}: {params: {restaurantId: string}}) {
     const currentUser = await getCurrentUser();
     if (!currentUser) {
         return NextResponse.error()
@@ -15,8 +15,16 @@ export async function POST(request: Request, {params}: {params: {id: string}}) {
     const created = await prisma.menu.create({
         data: {
             ...json,
-            restaurantId: Number(params.id),
-            userId: currentUser.id
+            user: {
+                connect: {
+                    id: currentUser.id
+                }
+            },
+            restaurant: {
+                connect: {
+                    id: params.restaurantId
+                }
+            }
         }
     })
 
