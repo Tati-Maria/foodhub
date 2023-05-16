@@ -1,8 +1,7 @@
-import { Suspense } from "react";
 import { getRestaurants } from "../actions/getRestaurants";
-import Grid from "../components/containers/Grid";
 import Title from "../components/ui/Title";
-import RestaurantCard from "../components/resturants/RestaurantCard";
+import RestaurantFilter from "./RestaurantFilter";
+import NotFound from "../components/ui/NotFound";
 
 
 const RestaurantHome = async() => {
@@ -12,14 +11,8 @@ const RestaurantHome = async() => {
     <section>
       <Title title="Restaurants" className="text-gray-900 text-4xl" />
       {/* filter restaurants inputs */}
-      {/* restaurants list */}
-      <Grid
-      className="py-10"
-      >
-        {restaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-        ))}
-      </Grid>
+      {restaurants.length > 0 && (<RestaurantFilter restaurants={restaurants} />)}
+      {restaurants.length === 0 && (<NotFound text="No Restaurants Found" />)}
     </section>
   )
 }
