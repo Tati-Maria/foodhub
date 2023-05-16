@@ -1,10 +1,11 @@
-import { menuSchema, restaurantSchema, reviewSchema } from "../hooks/schema/restaurantSchema";
+import { menuItemSchema, menuSchema, restaurantSchema, reviewSchema } from "../hooks/schema/restaurantSchema";
 import { z } from "zod";
 import { Restaurant as Restaurants, Menu, MenuItem, User, Review, Order } from "@prisma/client";
 
 export type Restaurant = z.infer<typeof restaurantSchema>;
 export type Menus = z.infer<typeof menuSchema>;
 export type Reviews = z.infer<typeof reviewSchema>;
+export type MenuItems = z.infer<typeof menuItemSchema>;
 
 export type SafeUser = Omit<User, "createdAt" | "updatedAt" | "emailVerified"> & {   
     id: string;
@@ -21,13 +22,13 @@ export type SafeRestaurant = Omit<Restaurants, "createdAt" | "updatedAt"> & {
     description: string;
     image: string;
     address: string;
+    website: string | null;
     phone: string;
     hours: string;
-    priceRange: string;
-    website: string | null;
-    ownerId: string;
     rating: number;
-    // user: SafeUser;
+    priceRange: string;
+    ownerId: string;
+    // owner: SafeUser;
     // menus: SafeMenu[];
     // menuItems: SafeMenuItem[];
     // orders: SafeOrder[];
@@ -42,6 +43,8 @@ export type SafeMenu = Omit<Menu, "createdAt" | "updatedAt"> & {
     image: string;
     restaurantId: string;
     userId: string;
+    restaurant: SafeRestaurant;
+    menuItems: SafeMenuItem[];
 }
 
 export type SafeMenuItem = Omit<MenuItem, "createdAt" | "updatedAt"> & {

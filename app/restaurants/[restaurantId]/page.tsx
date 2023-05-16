@@ -1,5 +1,6 @@
 import { getRestaurant } from '@/app/actions/getRestaurant'
 import RestaurantHeader from '@/app/components/resturants/RestaurantHeader';
+import RestaurantMenus from '@/app/components/resturants/RestaurantMenus';
 import React from 'react'
 
 interface IParams {
@@ -8,6 +9,7 @@ interface IParams {
 
 const Restaurant = async ({params}: {params: IParams}) => {
     const resturant = await getRestaurant(params);
+    const menus = resturant.menus;
 
 
   return (
@@ -23,6 +25,7 @@ const Restaurant = async ({params}: {params: IParams}) => {
         phone={resturant.phone}
         description={resturant.description}
         />
+        <RestaurantMenus menus={menus} restaurantId={resturant.id} />
     </section>
   )
 }

@@ -23,6 +23,7 @@ request: Request, {params}: {params: {id: string}}
                 }
             },
             userId: currentUser?.id,
+            price: Number(json.price),
         }
     });
 

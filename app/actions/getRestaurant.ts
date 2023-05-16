@@ -12,7 +12,11 @@ export async function getRestaurant(params: IParams) {
                 id: restaurantId,
             },
             include: {
-                menus: true,
+                menus: {
+                    include: {
+                        menuItems: true,
+                    }
+                },
                 reviews: true,
             }
         });
@@ -22,6 +26,11 @@ export async function getRestaurant(params: IParams) {
             menus: restaurant?.menus.map((menu) => ({
                 ...menu,
                 restaurant: restaurant.id,
+                menuItems: menu.menuItems.map((menuItem) => ({
+                    ...menuItem,
+                    menu: menu.id,
+                })),
+                
             })),
             reviews: restaurant?.reviews.map((review) => ({
                 ...review,
