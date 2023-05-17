@@ -13,12 +13,12 @@ const CreateReview = (params: Props) => {
     const {errors, handleSubmit, isSubmitting, register, onSubmit, rating, title, body} = useReview(params);
 
     const inputClass = `py-2 px-4 border border-gray-300 rounded-md focus:outline-none
-    focus:ring-2 focus:ring-red-500 focus:border-transparent`;
+    focus:ring-2 focus:ring-red-500 focus:border-transparent text-black`;
 
 
   return (
     <form
-    className="flex flex-col space-y-4"
+    className="flex flex-col space-y-4 text-gray-950"
     onSubmit={handleSubmit(onSubmit)}
     >
         <FormGroup

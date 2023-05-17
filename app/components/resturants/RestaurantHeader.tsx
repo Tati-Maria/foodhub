@@ -33,7 +33,7 @@ const RestaurantHeader = ({
   description,
 }: HeaderProps) => {
   return (
-    <div className='flex items-start gap-y-6 flex-col md:gap-x-6 md:flex-row md:items-center'>
+    <div className='flex items-start gap-y-6 flex-col md:gap-x-6 md:flex-row md:items-center border-b border-gray-100/20 pb-6'>
       <figure>
         <Image
         src={image || '/images/restaurant-placeholder.jpg'}
@@ -47,7 +47,7 @@ const RestaurantHeader = ({
         <h2 className='font-semibold text-red-600 text-lg capitalize md:text-xl'>
           {name}
         </h2>
-        <div className="flex items-center text-gray-500">
+        <div className="flex items-center text-gray-400">
           <span className='font-bold'>
             {priceRange} •
           </span>

@@ -1,6 +1,8 @@
+import { getCurrentUser } from '@/app/actions/getCurrentUser';
 import { getRestaurant } from '@/app/actions/getRestaurant'
 import RestaurantHeader from '@/app/components/resturants/RestaurantHeader';
 import RestaurantMenus from '@/app/components/resturants/RestaurantMenus';
+import RestaurantReview from '@/app/components/resturants/RestaurantReview';
 import React from 'react'
 
 interface IParams {
@@ -8,8 +10,10 @@ interface IParams {
 }
 
 const Restaurant = async ({params}: {params: IParams}) => {
-    const resturant = await getRestaurant(params);
-    const menus = resturant.menus;
+  const user = await getCurrentUser();
+  const resturant = await getRestaurant(params);
+  const menus = resturant.menus;
+  const reviews = resturant.reviews;
 
 
   return (
@@ -26,6 +30,7 @@ const Restaurant = async ({params}: {params: IParams}) => {
         description={resturant.description}
         />
         <RestaurantMenus menus={menus} restaurantId={resturant.id} />
+        <RestaurantReview reviews={reviews} />
     </section>
   )
 }

@@ -4,7 +4,7 @@ import Title from "../ui/Title"
 
 const CTA = () => {
   return (
-    <div className="hero h-[50vh] my-20" style={{backgroundImage: `url("/images/footer.jpg")`}}>
+    <div className="hero h-[50vh] my-20 rounded-md" style={{backgroundImage: `url("/images/footer.jpg")`}}>
         <div className="hero-overlay bg-opacity-20"></div>
         <div className="hero-content text-center text-white">
             <div className="max-w-md">

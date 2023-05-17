@@ -17,7 +17,11 @@ export async function getRestaurant(params: IParams) {
                         menuItems: true,
                     }
                 },
-                reviews: true,
+                reviews: {
+                    include: {
+                        user: true,
+                    }
+                },
             }
         });
 
@@ -35,6 +39,7 @@ export async function getRestaurant(params: IParams) {
             reviews: restaurant?.reviews.map((review) => ({
                 ...review,
                 restaurant: restaurant.id,
+                user: review.user.name 
             })),
         };
 

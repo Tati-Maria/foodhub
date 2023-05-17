@@ -13,7 +13,7 @@ const LoginModal = ({onClose}: LoginModalProps) => {
         className={`fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50`}
     >
         <div
-        className='relative flex flex-col items-center justify-center w-full max-w-md p-6 mx-auto bg-white rounded-md shadow-lg'
+        className='relative flex flex-col items-center justify-center w-full max-w-md p-6 mx-auto bg-gray-950 rounded-md shadow-lg'
         >
             <Button
             type='button'

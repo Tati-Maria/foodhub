@@ -3,17 +3,17 @@
 // I WILL FIND A BETTER WAY TO FILTER RESTAURANTS USING SERVER SIDE RENDERING 
 
 import { useState, useEffect, useCallback} from "react";
-import { SafeRestaurant } from "../types";
+import { SafeRestaurant, SafeRestaurantProps } from "../types";
 import Grid from "../components/containers/Grid";
 import RestaurantCard from "../components/resturants/RestaurantCard";
 
 interface IRestaurantFilter {
-    restaurants: SafeRestaurant[];
+    restaurants: SafeRestaurantProps[];
 }
 
 const RestaurantFilter = ({restaurants}: IRestaurantFilter) => {
     const [search, setSearch] = useState('');
-    const [filterRestaurants, setFilterRestaurants] = useState<SafeRestaurant[]>([]);
+    const [filterRestaurants, setFilterRestaurants] = useState<SafeRestaurantProps[]>([]);
     const [maxPrice, setMaxPrice] = useState("$$$$");
     const [minPrice, setMinPrice] = useState("$");
     const [minRating, setMinRating] = useState(0);
@@ -49,7 +49,7 @@ const RestaurantFilter = ({restaurants}: IRestaurantFilter) => {
   return (
     <>
     <section
-    className="bg-red-500 p-4 text-white"
+    className="p-6 bg-secondary/50 rounded-md"
     >
         <form
         className="flex flex-col space-y-4"
@@ -128,7 +128,7 @@ const RestaurantFilter = ({restaurants}: IRestaurantFilter) => {
             id="search" 
             value={search} 
             onChange={handleSearch} 
-            placeholder="Not Implemented Yet..."
+            placeholder="Search for a restaurant by name..."
             className="border border-gray-900 rounded-md p-2 text-gray-900"
             />
         </form>
@@ -140,6 +140,7 @@ const RestaurantFilter = ({restaurants}: IRestaurantFilter) => {
          className="py-10"
         >
             {filterRestaurants.map((restaurant) => (
+                /* @ts-expect-error async component */
                 <RestaurantCard key={restaurant.id} restaurant={restaurant} />
             ))}
         </Grid>

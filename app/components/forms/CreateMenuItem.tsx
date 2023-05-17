@@ -14,8 +14,7 @@ const CreateMenuItem = (params: Props) => {
     const {errors, handleSubmit, isSubmitting, register, onSubmit, name, description, price, setCustomValue, image} = useMenuItem(params);
 
     const inputClass = `py-2 px-4 border border-gray-300 rounded-md focus:outline-none
-    focus:ring-2 focus:ring-red-500 focus:border-transparent
-    ${errors.name ? "ring-2 ring-red-500 border-red-500" : "focus:ring-gray-500"}`
+    focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-950`
 
   return (
     <form
