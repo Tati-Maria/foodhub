@@ -6,14 +6,12 @@ import { useMenuItem } from '@/app/hooks/useMenuItem'
 import ImageUpload from '../inputs/ImageUpload'
 
 interface Props {
-    params: {
-        menuId: string;
-        id: string;
-    }
+    menuId: string | undefined;
+    id: string;
 }
 
-const CreateMenuItem = ({params}: Props) => {
-    const {errors, handleSubmit, isSubmitting, register, onSubmit, name, description, price, setCustomValue, image} = useMenuItem({params});
+const CreateMenuItem = (params: Props) => {
+    const {errors, handleSubmit, isSubmitting, register, onSubmit, name, description, price, setCustomValue, image} = useMenuItem(params);
 
     const inputClass = `py-2 px-4 border border-gray-300 rounded-md focus:outline-none
     focus:ring-2 focus:ring-red-500 focus:border-transparent
@@ -37,6 +35,7 @@ const CreateMenuItem = ({params}: Props) => {
                 value={name}
                 disabled={isSubmitting}
                 className={inputClass}
+                placeholder='Dish Name'
                 />
                 {errors.name && (
                     <div
@@ -56,7 +55,9 @@ const CreateMenuItem = ({params}: Props) => {
                 {...register('price', {required: true})}
                 className={inputClass}
                 id='price'
-                type='number' 
+                type='number'
+                placeholder='Price'
+                step={.01} 
                 />
                 {errors.price && (
                     <div
@@ -69,7 +70,9 @@ const CreateMenuItem = ({params}: Props) => {
             </div>
         </FormGroup>
         <FormGroup>
-            <div>
+            <div
+            className="flex flex-col space-y-1"
+            >
                 <textarea
                 className={inputClass}
                 placeholder="Dish Description"
@@ -94,6 +97,12 @@ const CreateMenuItem = ({params}: Props) => {
             onUpload={(url) => setCustomValue('image', url)}
             />
         </FormGroup>
+        <Button
+        disabled={isSubmitting}
+        type='submit'
+        text='Create Menu Item'
+        className='bg-black text-white rounded-md hover:bg-gray-800 transition duration-200 ease-in-out' 
+        />
     </form>
   )
 }

@@ -1,16 +1,18 @@
 import prisma from "../lib/prima";
 
 interface IParams {
+    menuId: string;
     id: string;
 }
 
 export async function getMenu(params: IParams) {
     try {
-        const { id } = params;
+        const { id, menuId } = params;
 
-        const menu = await prisma.menu.findUnique({
+        const menu = await prisma.menu.findFirst({
             where: {
-                id,
+                id: menuId,
+                restaurantId: id,
             },
             include: {
                 menuItems: true,

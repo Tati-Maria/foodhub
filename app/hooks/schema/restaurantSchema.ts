@@ -21,7 +21,7 @@ export const menuItemSchema = z.object({
     name: z.string().min(3, "Name must be at least 3 characters long").max(50, "Name must be at most 50 characters long"),
     description: z.string().min(10, "Description must be at least 10 characters long").max(500, "Description must be at most 1000 characters long"),
     image: z.string().url("Image must be a valid URL"),
-    price: z.number().min(1, "Price must be at least $1").max(1000, "Price must be at most $1000"),
+    price: z.string().min(1, "Price must be at least $1").max(1000, "Price must be at most $1000"),
 });
 
 export const reviewSchema = z.object({

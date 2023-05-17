@@ -8,14 +8,12 @@ import {toast} from "react-hot-toast";
 
 
 interface Props {
-    params: {
-        menuId: string;
-        id: string;
-    }
+    id: string;
+    menuId: string | undefined;
 }
 
 
-export const useMenuItem = ({params}: Props) => {
+export const useMenuItem = ({menuId, id}: Props) => {
     
     const {register, handleSubmit, formState: {errors, isSubmitting}, watch, reset, setValue} = useForm<MenuItems>({
         criteriaMode: "all",
@@ -23,7 +21,7 @@ export const useMenuItem = ({params}: Props) => {
             name: "",
             description: "",
             image: "",
-            price: 0,
+            price: "",
         },
         resolver: zodResolver(menuItemSchema),
     });
@@ -44,8 +42,8 @@ export const useMenuItem = ({params}: Props) => {
     }
     const onSubmit = useCallback(async (data: MenuItems) => {
         try {
-            const response = await axios.post(`/api/restaurants/${params.menuId}/menus/${params.id}/menuItems`, data);
-            if (response.status === 201) {
+            const response = await axios.post(`/api/restaurants/${menuId}/menus/${id}/menuItems`, data);
+            if (response.status === 200) {
                 toast.success("Menu item added successfully");
                 reset();
             } else {
@@ -53,8 +51,9 @@ export const useMenuItem = ({params}: Props) => {
             }
         } catch (error: any) {
             toast.error(error.message);
+            console.log(error.message);
         }
-    }, [reset, params.menuId, params.id]);
+    }, [reset]);
 
     return {
         register,
