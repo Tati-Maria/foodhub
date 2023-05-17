@@ -1,5 +1,5 @@
 'use client'
-import {IconType} from "react-icons";
+import { IconType } from "react-icons"
 
 type ButtonProps = {
     text?: string

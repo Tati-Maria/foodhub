@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className='bg-white'>
-      <body className={urban.className}>
+      <body className={`${urban.className} bg-[#e4e9f7]`}>
         <Provider>
           <Container>
             <NavBar />

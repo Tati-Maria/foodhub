@@ -12,7 +12,7 @@ interface ServiceCardProps {
 const ServiceCard = ({name, description,image, link}: ServiceCardProps) => {
   return (
     <li
-    className="flex flex-col items-start space-y-4 rounded-md p-6 shadow-md"
+    className="flex flex-col items-start space-y-4 rounded-md p-6 shadow-md bg-gray-50"
     >
       <figure
       className="relative w-full h-28"

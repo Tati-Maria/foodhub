@@ -14,7 +14,7 @@ const RestaurantCard = ({restaurant}: RestaurantCardProps) => {
 
   return (
     <div
-    className="border-2 border-gray-300 rounded-md p-6 hover:shadow-md transition duration-200 ease-in-out"
+    className="border-2 border-gray-300 rounded-md p-6 hover:shadow-md transition duration-200 ease-in-out bg-white"
     >
         <Link
         className="flex flex-col space-y-2"
