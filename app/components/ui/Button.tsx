@@ -24,7 +24,7 @@ const Button = ({
     onClick={onClick}
     disabled={disabled || loading}
     className={`
-    flex items-center justify-center py-2 px-6 font-medium transition-colors duration-300
+    flex items-center text-white justify-center py-2 px-6 font-medium transition-colors duration-300
     ${className} ${disabled && 'opacity-50 cursor-not-allowed'} ${loading && 'cursor-wait'} 
     `}
     >

@@ -1,46 +1,32 @@
-import Image from "next/image"
 import TextView from "../ui/TextView"
 import Link from "next/link"
-import {BsArrowRight} from "react-icons/bs"
 
 interface ServiceCardProps {
     name: string
     description: string
-    image: string
     link: string
+    icon: JSX.Element
 }
-const ServiceCard = ({name, description,image, link}: ServiceCardProps) => {
+const ServiceCard = ({name, description, link, icon}: ServiceCardProps) => {
   return (
     <li
-    className="flex flex-col items-start space-y-4 rounded-md p-6 shadow-md bg-gray-50"
+    className="flex flex-col items-center text-center space-y-4 p-6 border-b-2 lg:border-r-2 border-gray-300/30 last:border-b-0 lg:last:border-r-0 lg:border-b-0"
     >
-      <figure
-      className="relative w-full h-28"
-      >
-        <Image
-        className="rounded-md object-contain w-full h-full"
-        alt="Food Delivery"
-        src={image}
-        width={50}
-        height={50}
-        priority
-         />
-      </figure>
+      <div>
+        {icon}
+      </div>
       <div
-      className="flex flex-col items-start space-y-2"
+      className="flex flex-col space-y-2"
       >
-        <h3 className="text-gray-900 font-bold text-lg">{name}</h3>
+        <h3 className="text-gray-50 font-bold text-lg">{name}</h3>
         <TextView
         text={description}
-        className="text-gray-500 sm:text-base" 
+        className="sm:text-base text-gray-400" 
         />
       </div>
-      <Link href={link} className="text-red-500 text-sm hover:text-red-600 flex items-center space-x-2">
+      <Link href={link} className="text-primary text-sm hover:text-red-600 flex items-center space-x-2">
         <span>
           Know More
-        </span>
-        <span>
-          <BsArrowRight size={18} className="text-red-500" />
         </span>
       </Link>
     </li>

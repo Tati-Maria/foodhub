@@ -16,7 +16,9 @@ const AsideMenu = () => {
         <div
         className="flex justify-between items-center py-2"
         >
-          <Logo />
+          <Logo
+          icon="text-[#102336]" 
+          />
           <Button
           type="button"
           onClick={closeSideBar}

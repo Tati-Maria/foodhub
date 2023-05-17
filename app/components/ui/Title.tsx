@@ -12,7 +12,7 @@ interface TitleProps {
 const Title = ({className="", title}: TitleProps) => {
   return (
     <h2
-    className={`mb-3 text-2xl font-bold ${outfit.className}  ${className}`}
+    className={`mb-3 text-2xl font-bold text-white ${outfit.className}  ${className}`}
     >
         {title}
     </h2>

@@ -10,7 +10,7 @@
     bottom: 0;
     width: 250px;
     height: 100vh;
-    background-color: #fff;
+    background-color: #f0c633;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 100;
     transform: translate(-250px, 0);

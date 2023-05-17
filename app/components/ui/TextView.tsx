@@ -8,7 +8,7 @@ type TextViewProps = {
 const TextView = ({text, className}: TextViewProps) => {
   return (
     <p
-    className={`text-gray-500 ${className}`}
+    className={`${className}`}
     >
         {text}
     </p>

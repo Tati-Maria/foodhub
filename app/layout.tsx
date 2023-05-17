@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className='bg-white'>
-      <body className={`${urban.className} bg-[#e4e9f7]`}>
+      <body className={`${urban.className} bg-[#102326] text-white`}>
         <Provider>
           <Container>
             <NavBar />
@@ -43,3 +43,4 @@ export default function RootLayout({
     </html>
   )
 }
+

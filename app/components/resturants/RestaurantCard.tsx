@@ -14,7 +14,7 @@ const RestaurantCard = ({restaurant}: RestaurantCardProps) => {
 
   return (
     <div
-    className="border-2 border-gray-300 rounded-md p-6 hover:shadow-md transition duration-200 ease-in-out bg-white"
+    className="rounded-md p-6 hover:shadow-md transition duration-200 ease-in-out bg-[#02001b]/50"
     >
         <Link
         className="flex flex-col space-y-2"
@@ -33,9 +33,9 @@ const RestaurantCard = ({restaurant}: RestaurantCardProps) => {
             <div
             className="flex flex-col items-start space-y-2"
             >
-                <h3 className="text-gray-900 font-semibold text-lg underline lg:no-underline">{restaurant.name}</h3>
+                <h3 className="text-gray-100 font-semibold text-lg underline lg:no-underline">{restaurant.name}</h3>
                 <p
-                className="text-gray-500 text-sm space-x-2 flex items-center"
+                className="text-gray-200 text-sm space-x-2 flex items-center"
                 >
                     <span>
                         {restaurant.priceRange} •
@@ -51,9 +51,9 @@ const RestaurantCard = ({restaurant}: RestaurantCardProps) => {
                     </span>
                 </p>
                 <p
-                className="text-gray-500 text-sm space-x-2 flex items-center"
+                className="text-gray-200 text-sm space-x-2 flex items-center"
                 >
-                    <GrLocation className="text-gray-500 mr-1" />
+                    <GrLocation className="mr-1" />
                     <span>
                         {restaurant.address}
                     </span>

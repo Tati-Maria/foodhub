@@ -14,11 +14,11 @@ const Service = () => {
       className="text-center space-y-2"
       >
         <Title
-        className="text-2xl text-gray-900 md:text-4xl"
+        className="text-4xl"
         title="We are ready to serve your needs"
         />
         <TextView
-        className="text-base max-w-md mx-auto"
+        className="text-base max-w-md mx-auto text-gray-400"
         text="At Foodhub, we offer a wide range of services to our customers. We are committed to providing the best services to our customers." 
         />
       </Article>
