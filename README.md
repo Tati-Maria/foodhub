@@ -1,34 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Foodhub - A food ordering app
 
-## Getting Started
+## Description
 
-First, run the development server:
+This is a food ordering website where users can order food from different restaurants. The website is built using NextJs framework and uses PostgreSQL as the database. The website is hosted on Vercel.
+
+## Features
+
+- Users can search for restaurants.
+- Users can leave a review for a restaurant.
+- Users can create an account and login to the website using Google, Facebook or Github.
+- Users can view different food items and add them to their cart.(soon to be implemented)
+- Users can view their cart and update the quantity of food items(soon to be implemented)
+- Users can view their order details.(soon to be implemented)
+- Users can pay for their order using Stripe.(soon to be implemented)
+  
+## Tech Stack
+
+**Stack:** NextJs, React, Zustand, TailwindCSS and TypeScript.
+**Authentication:** NextAuth.js.
+**Database:** PostgreSQL.
+**Payment:** Stripe.(soon to be implemented)
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  git clone
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd foodhouse
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Project Status
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The project is currently in development. Users can search for restaurants and leave a review for a restaurant. The next steps are to implement the cart functionality and payment functionality.
