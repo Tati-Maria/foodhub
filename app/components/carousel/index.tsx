@@ -1,5 +1,5 @@
 'use client'
-import { SafeRestaurant } from "@/app/types";
+import { SafeRestaurant, SafeRestaurantProps } from "@/app/types";
 import {Options, Splide, SplideSlide} from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 import RestaurantCard from "../resturants/RestaurantCard";
@@ -29,7 +29,7 @@ const options: Options = {
 }
 
 interface CarouselProps {
-    restaurants: SafeRestaurant[];
+    restaurants: SafeRestaurantProps[];
 }
 
 

@@ -53,7 +53,7 @@ export const useMenuItem = ({menuId, id}: Props) => {
             toast.error(error.message);
             console.log(error.message);
         }
-    }, [reset]);
+    }, [reset, menuId, id]);
 
     return {
         register,

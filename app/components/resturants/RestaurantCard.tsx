@@ -4,23 +4,25 @@ import Link from "next/link"
 import {FaStar} from 'react-icons/fa'
 import {VscVerified} from 'react-icons/vsc'
 import {GrLocation} from 'react-icons/gr'
-import { getReviews } from "@/app/actions/getReviews"
+
 
 interface RestaurantCardProps {
-    restaurant: SafeRestaurant
+    restaurant: {
+        id: string;
+        name: string;
+        image: string;
+        priceRange: string;
+        rating: number;
+        address: string;
+        description: string;
+        website: string | null;
+        phone: string;
+        hours: string;
+        ownerId: string;
+    }
 }
 
-const RestaurantCard = async({restaurant}: RestaurantCardProps) => {
-    // const reviews = await getReviews();
-
-    // function calculateRestaurantRating() {
-    //     const restaurantReviews = reviews.filter((review) => review.restaurantId === restaurant.id);
-    //     const totalReviews = restaurantReviews.length;
-    //     const totalRating = restaurantReviews.reduce((acc, review) => acc + review.rating, 0);
-    //     const averageRating = totalRating / totalReviews;
-    //     return averageRating;
-    // }
-
+const RestaurantCard = ({restaurant}: RestaurantCardProps) => {
 
   return (
     <div

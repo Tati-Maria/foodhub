@@ -3,7 +3,7 @@
 // I WILL FIND A BETTER WAY TO FILTER RESTAURANTS USING SERVER SIDE RENDERING 
 
 import { useState, useEffect, useCallback} from "react";
-import { SafeRestaurant, SafeRestaurantProps } from "../types";
+import { SafeRestaurantProps } from "../types";
 import Grid from "../components/containers/Grid";
 import RestaurantCard from "../components/resturants/RestaurantCard";
 
@@ -140,7 +140,6 @@ const RestaurantFilter = ({restaurants}: IRestaurantFilter) => {
          className="py-10"
         >
             {filterRestaurants.map((restaurant) => (
-                /* @ts-expect-error async component */
                 <RestaurantCard key={restaurant.id} restaurant={restaurant} />
             ))}
         </Grid>
