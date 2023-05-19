@@ -27,12 +27,13 @@ type ComponentProps = {
 };
 
 const RestaurantMenus = (
-  { menus, restaurantId }: ComponentProps,
+  { menus}: ComponentProps,
 ) => {
   
   return (
     <div>
       {menus?.map((menu) => (
+        /* @ts-expect-error Async Component */
         <MenuCard
         key={menu.id}
         id={menu.id}
@@ -40,6 +41,7 @@ const RestaurantMenus = (
         name={menu.name}
         description={menu.description}
         menuItem={menu.menuItems}
+        menuOwner={menu.userId}
         /> 
       ))}
     </div>

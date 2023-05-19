@@ -13,9 +13,10 @@ const NavBar = () => {
 
   return (
     <nav
-    className="flex items-center justify-between py-4"
+    className="flex items-center justify-between py-6"
     >
-        <Logo />
+        <Logo 
+        />
         <div
         className="flex items-center"
         >
@@ -23,13 +24,13 @@ const NavBar = () => {
           type="button"
           onClick={cart ? closeCart : openCart}
           icon={BsFillBasket2Fill}
-          className="p-0 text-xl hover:text-red-500"
+          className="p-0 text-2xl hover:text-red-500"
           />
           <Button
           type="button"
           onClick={open ? closeSideBar : openSideBar}
           icon={FaBars}
-          className="p-0 text-xl hover:text-red-500" 
+          className="p-0 text-2xl hover:text-red-500" 
           />
         </div>
         {open && <AsideMenu />}

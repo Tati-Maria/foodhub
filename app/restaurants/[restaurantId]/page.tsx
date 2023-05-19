@@ -30,7 +30,7 @@ const Restaurant = async ({params}: {params: IParams}) => {
         description={resturant.description}
         />
         <RestaurantMenus menus={menus} restaurantId={resturant.id} />
-        <RestaurantReview reviews={reviews} />
+        <RestaurantReview reviews={reviews} user={user?.id} restaurantOwner={resturant.ownerId} restaurantId={resturant.id} />
     </section>
   )
 }

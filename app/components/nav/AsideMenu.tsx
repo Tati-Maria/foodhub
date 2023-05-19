@@ -17,7 +17,7 @@ const AsideMenu = () => {
         className="flex justify-between items-center py-2"
         >
           <Logo
-          icon="text-gray-950" 
+          icon="text-gray-800" 
           />
           <Button
           type="button"
