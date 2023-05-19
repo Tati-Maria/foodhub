@@ -1,3 +1,5 @@
+'use client'
+
 import Decimal from "decimal.js/decimal"
 import Button from '../ui/Button'
 import TextView from './TextView'
@@ -20,10 +22,10 @@ const MenuItemCard = ({itemId, name, price, description, image}: Props) => {
         style: "currency",
         currency: "EUR",
     });
-
-
+    
   return (
-    <div
+    <Link
+    href={`/menuItems/${itemId}`}
     className="flex flex-col gap-4 p-4 rounded-md shadow-md bg-white" 
     >
         <figure>
@@ -62,7 +64,7 @@ const MenuItemCard = ({itemId, name, price, description, image}: Props) => {
                 />
             </div>
         </div>
-    </div>
+    </Link>
   )
 }
 

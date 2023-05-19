@@ -1,8 +1,14 @@
+import Title from "../components/ui/Title"
 
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <section>
+      <Title
+      title="Welcome to our help page"
+      className="text-gray-100 text-4xl" 
+      />
+    </section>
   )
 }
 

@@ -18,4 +18,6 @@ export async function POST(request: Request, {params}: {params: {id: string}}) {
             userId: currentUser.id,
         }
     })
+
+    return NextResponse.json(order);
 }
