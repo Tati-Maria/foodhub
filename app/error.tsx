@@ -1,5 +1,6 @@
 'use client'
 //error display
+import Image from "next/image"
 
 export default function Error() {
     return (
@@ -15,15 +16,19 @@ export default function Error() {
             items-center
             gap-4
             '>
-                <h1 className='
+                <Image
+                alt='Error'
+                src='/place-holder.svg' 
+                />
+                <h2 className='
                 text-4xl
                 font-semibold
-                text-gray-800
+                text-gray-100
                 '>
                     Oops! Something went wrong.
-                </h1>
+                </h2>
                 <p className='
-                text-gray-600
+                text-gray-400
                 text-center
                 '>
                     We&apos;re having some trouble loading this page. Please try again later or refresh.

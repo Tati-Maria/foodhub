@@ -1,7 +1,4 @@
-'use client'
-
 import Decimal from "decimal.js/decimal"
-import Button from '../ui/Button'
 import TextView from './TextView'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -57,11 +54,6 @@ const MenuItemCard = ({itemId, name, price, description, image}: Props) => {
                 >
                     {priceCurrency}
                 </span>
-                <Button
-                type='button'
-                text='Add to Cart'
-                className="text-sm bg-green-500 rounded-md text-white  hover:bg-green-600 transition-colors" 
-                />
             </div>
         </div>
     </Link>
