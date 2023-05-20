@@ -8,7 +8,7 @@ const NotFound = ({text}: NotFoundProps) => {
     className="flex flex-col items-center justify-center h-screen"
     >
         <p
-        className="text-3xl font-bold text-gray-100"
+        className="text-3xl font-medium text-gray-500"
         >
             {text || "Not Found"}
         </p>
