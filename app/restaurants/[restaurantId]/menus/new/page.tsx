@@ -4,6 +4,21 @@ import CreateMenus from "@/app/components/forms/CreateMenu";
 import NotFound from "@/app/components/ui/NotFound";
 import Title from "@/app/components/ui/Title";
 
+export const generateMetadata = async ({params}: {params: {restaurantId: string}}) => {
+  const restaurant = await getRestaurant(params);
+  if(!restaurant.id) {
+    return {
+      title: 'Restaurant Not Found',
+      description: 'Restaurant Not Found',
+    }
+  } 
+
+  return {
+    title: `Create Menu for ${restaurant.name}`,
+    description: `Create Menu for ${restaurant.name}`,
+  }
+}
+
 interface IParams {
   restaurantId: string
 }

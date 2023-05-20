@@ -16,10 +16,6 @@ export default function Error() {
             items-center
             gap-4
             '>
-                <Image
-                alt='Error'
-                src='/place-holder.svg' 
-                />
                 <h2 className='
                 text-4xl
                 font-semibold

@@ -1,8 +1,9 @@
 'use client'
-import Image from "next/image"
 import Button from "../components/ui/Button"
 import Title from "../components/ui/Title"
 import { signIn } from "next-auth/react"
+
+
 
 
 const LoginPage = () => {

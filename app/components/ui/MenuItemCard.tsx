@@ -23,15 +23,16 @@ const MenuItemCard = ({itemId, name, price, description, image}: Props) => {
   return (
     <Link
     href={`/menuItems/${itemId}`}
-    className="flex flex-col gap-4 p-4 rounded-md shadow-md bg-white" 
+    className="flex flex-col gap-4 p-4 rounded-md shadow-md bg-white hover:bg-red-50 transition ease-in-out duration-300" 
     >
         <figure>
             <Image
             src={image}
             className="rounded-md object-cover w-full h-full"
-            width={300}
-            height={200}
-            alt='Menu Item Image' 
+            width={250}
+            height={150}
+            alt='Menu Item Image'
+            loading="lazy" 
             />
         </figure>
         <div
@@ -50,7 +51,7 @@ const MenuItemCard = ({itemId, name, price, description, image}: Props) => {
             className="flex items-center justify-between"
             >
                 <span
-                className="text-gray-900 font-bold text-lg"
+                className="text-gray-900 font-bold text-base md.text-lg"
                 >
                     {priceCurrency}
                 </span>

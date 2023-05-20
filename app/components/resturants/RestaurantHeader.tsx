@@ -47,7 +47,7 @@ const RestaurantHeader = ({
         <h2 className='font-semibold text-red-600 text-lg capitalize md:text-xl'>
           {name}
         </h2>
-        <div className="flex items-center text-gray-400">
+        <div className="flex flex-col items-start md:flex-row md:items-center text-gray-400">
           <span className='font-bold'>
             {priceRange} •
           </span>

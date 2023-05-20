@@ -46,7 +46,7 @@ const MenuCard = async (
             )}
         </Article>
         <Grid
-        className="my-10"
+        className="my-10 grid-cols-2"
         >
           {menuItem.map((item: any) => (
             <MenuItemCard
