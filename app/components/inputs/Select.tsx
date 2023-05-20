@@ -1,8 +1,6 @@
 'use client'
-
-import {IconType} from "react-icons";
 import {IoWarningOutline} from "react-icons/io5";
-import { UseFormRegister, FieldValues, FieldErrors } from "react-hook-form";
+import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { Restaurant } from "@/app/types";
 
 interface SelectProps {
@@ -31,7 +29,7 @@ const Select = ({id, label, register, error, value, required}: SelectProps) => {
             value={value}
             className={`
             py-2 px-4 border border-gray-300 rounded-md focus:outline-none 
-            focus:ring-2 focus:ring-red-500 focus:border-transparent 
+            focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-950
             ${error[id] ? "ring-2 ring-red-500 border-red-500" : "focus:ring-gray-500"}
             `}
             >

@@ -46,7 +46,7 @@ const TextArea = ({
             placeholder={placeholder}
             value={value}
             className={`
-            py-2 px-4 border border-gray-300 rounded-md focus:outline-none 
+            py-2 px-4 border border-gray-300 rounded-md focus:outline-none text-gray-950 
             focus:ring-2 focus:ring-red-500 focus:border-transparent 
             ${error[id] ? "ring-2 ring-red-500 border-red-500" : "focus:ring-gray-500"}
             ${disabled && "bg-gray-100 cursor-not-allowed"}

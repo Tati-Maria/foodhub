@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation"
 import { signOut, useSession } from "next-auth/react"
 import MenuItem from "./MenuItem"
+import {IoMdAddCircleOutline} from "react-icons/io"
 import {AiOutlineHome} from "react-icons/ai"
 import { GrRestaurant } from "react-icons/gr"
 import {IoRestaurant} from "react-icons/io5"
@@ -43,11 +44,18 @@ const MenuList = () => {
         icon={FiHelpCircle}
         />
         {status === "authenticated" && (
+          <>
           <MenuItem
           text="Profile"
           route="/profile"
           icon={CgProfile}
           />
+          <MenuItem
+          text="Add Restaurant"
+          route="/restaurants/new"
+          icon={IoMdAddCircleOutline}
+          />
+          </>
         )}
     </ul>
     {status === "authenticated" ? (
