@@ -2,17 +2,16 @@ import { getMenuItem } from "@/app/actions/getMenuItem"
 import Title from "@/app/components/ui/Title"
 import Image from "next/image"
 
-
 interface IParams {
-    restaurantId: string
-    menuId: string
-    id: string
+    menuItemId: string
 }
 
-const MenuItem = async (
+
+const MenuItem = async(
     {params}: {params: IParams}
 ) => {
     const menuItem = await getMenuItem(params);
+   
     
   return (
     <div

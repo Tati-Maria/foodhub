@@ -2,18 +2,17 @@ import prisma from "../lib/prima";
 import Decimal from "decimal.js/decimal"
 
 interface IParams {
-    restaurantId: string;
-    menuId: string;
-    id: string;
+    menuItemId: string;
 }
 
-export async function getMenuItem(params: IParams) {
+export async function getMenuItem(
+    { menuItemId }: IParams
+) {
     try {
-        const { id, menuId, restaurantId } = params;
-
         const menuItem = await prisma.menuItem.findUnique({
             where: {
-                id,
+                id: menuItemId,
+                
             },
             include: {
                 menu: {
