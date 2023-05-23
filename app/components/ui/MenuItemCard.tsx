@@ -9,9 +9,11 @@ interface Props {
     description: string
     price: number
     image: string
+    restaurantId: string
+    menuId: string
 }
 
-const MenuItemCard = ({itemId, name, price, description, image}: Props) => {
+const MenuItemCard = ({itemId, name, price, description, image, restaurantId, menuId}: Props) => {
     // transform price(decimal) to number
     const priceDecimal = new Decimal(price);
     // transform price currency depending on locale euro
@@ -22,7 +24,7 @@ const MenuItemCard = ({itemId, name, price, description, image}: Props) => {
     
   return (
     <Link
-    href={`/menuItems/${itemId}`}
+    href={`/restaurants/${restaurantId}/menus/${menuId}/menuItem/${itemId}`}
     className="flex flex-col gap-4 p-4 rounded-md shadow-md bg-white hover:bg-red-50 transition ease-in-out duration-300" 
     >
         <figure>

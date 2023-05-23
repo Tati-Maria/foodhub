@@ -24,6 +24,7 @@ type SafeMenu = {
 type ComponentProps = {
   menus: SafeMenu[] | undefined;
   restaurantId: string | undefined;
+  userID: string | undefined;
 };
 
 const RestaurantMenus = (

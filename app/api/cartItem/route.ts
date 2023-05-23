@@ -2,7 +2,7 @@ import prisma from "@/app/lib/prima";
 import { getCurrentUser } from "@/app/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request, {params}: {params: {id: string}}) {
+export async function POST(request: Request) {
     const currentUser = await getCurrentUser();
 
     if(!currentUser) {
@@ -11,17 +11,14 @@ export async function POST(request: Request, {params}: {params: {id: string}}) {
 
     const json = await request.json();
 
-    const order = await prisma.order.create({
+    const cartItem = await prisma.cartItem.create({
         data: {
             ...json,
-            restaurantId: params.id,
-            userId: currentUser.id,
-            items: {
-                create: json.items,
-            },
-            total: json.total,
+            menuItemId: json.menuItemId,
+            cartId: json.cartId,
+            orderId: json.orderId,
         }
-    })
+    });
 
-    return NextResponse.json(order);
+    return NextResponse.json(JSON.stringify(cartItem));
 }

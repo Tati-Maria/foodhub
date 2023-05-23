@@ -59,7 +59,7 @@ const Restaurant = async ({params}: {params: IParams}) => {
         description={resturant.description}
         />
         {menus?.length === 0 && (<NotFound text="Looks Like the owner has not added any menu yet 🥴" />)}
-        <RestaurantMenus menus={menus} restaurantId={resturant.id} />
+        <RestaurantMenus menus={menus} restaurantId={resturant.id} userID={user?.id} />
         <RestaurantReview reviews={reviews} user={user?.id} restaurantOwner={resturant.ownerId} restaurantId={resturant.id} />
     </section>
   )

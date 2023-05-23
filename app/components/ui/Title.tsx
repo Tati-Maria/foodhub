@@ -6,7 +6,7 @@ const outfit = Outfit({
 
 interface TitleProps {
     className?: string
-    title: string
+    title: string | undefined
 }
 
 const Title = ({className="", title}: TitleProps) => {

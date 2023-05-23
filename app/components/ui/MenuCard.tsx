@@ -28,8 +28,9 @@ type MenuCardProps = {
 const MenuCard = async (
   {id, restaurantId, name, description, menuItem, menuOwner}: MenuCardProps,
 ) => {
-
   const user = await getCurrentUser();
+
+  
 
   return (
     <section className="my-20">
@@ -55,7 +56,9 @@ const MenuCard = async (
             name={item.name}
             description={item.description}
             price={item.price}
-            image={item.image} 
+            image={item.image}
+            restaurantId={restaurantId}
+            menuId={id} 
             />
           ))}
         </Grid>
