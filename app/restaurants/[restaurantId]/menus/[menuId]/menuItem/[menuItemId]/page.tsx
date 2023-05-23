@@ -1,4 +1,5 @@
 import { getMenuItem } from "@/app/actions/getMenuItem"
+import AddToCart from "@/app/components/actionComponents/AddToCart"
 import Title from "@/app/components/ui/Title"
 import Image from "next/image"
 
@@ -6,11 +7,31 @@ interface IParams {
     menuItemId: string
 }
 
+export const generateMetadata = async ({params}: {params: IParams}) => {
+    const menuItem = await getMenuItem(params);
+    if(!menuItem?.id) {
+        return {
+            title: 'Menu Item Not Found',
+            description: 'Menu Item Not Found',
+        }
+    }
+
+    return {
+        title: menuItem?.name,
+        description: menuItem?.description,
+    }
+}
+
 
 const MenuItem = async(
     {params}: {params: IParams}
 ) => {
     const menuItem = await getMenuItem(params);
+
+    async function addItem() {
+        "use server";
+    }
+
    
     
   return (
@@ -27,6 +48,12 @@ const MenuItem = async(
             <span>
                 {menuItem?.price} €
             </span>
+            {/* @ts-expect-error  */}
+            <AddToCart 
+            itemId={menuItem?.id}
+            price={menuItem?.price}
+            menuItem={menuItem}
+            />
         </div>
         <figure>
             <Image
