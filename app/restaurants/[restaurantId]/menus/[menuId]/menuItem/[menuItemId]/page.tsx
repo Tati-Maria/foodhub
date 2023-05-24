@@ -28,11 +28,6 @@ const MenuItem = async(
 ) => {
     const menuItem = await getMenuItem(params);
 
-    async function addItem() {
-        "use server";
-    }
-
-   
     
   return (
     <div
@@ -53,6 +48,7 @@ const MenuItem = async(
             itemId={menuItem?.id}
             price={menuItem?.price}
             menuItem={menuItem}
+            restaurantId={menuItem?.menu?.restaurantId}
             />
         </div>
         <figure>

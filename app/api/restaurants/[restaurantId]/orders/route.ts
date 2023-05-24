@@ -1,8 +1,19 @@
 import prisma from "@/app/lib/prima";
 import { getCurrentUser } from "@/app/actions/getCurrentUser";
 import { NextResponse } from "next/server";
+import { Prisma } from "@prisma/client";
 
-export async function POST(request: Request, {params}: {params: {id: string}}) {
+
+export async function GET(request: Request, {params}: {params: {restaurantId: string}}) {
+    try {
+        const orders = await prisma.order.findMany();
+        return NextResponse.json(JSON.stringify(orders));
+    } catch (error: any) {
+        return NextResponse.error();
+    }
+}
+
+export async function POST(request: Request, {params}: {params: {restaurantId: string}}) {
     const currentUser = await getCurrentUser();
 
     if(!currentUser) {
@@ -11,17 +22,22 @@ export async function POST(request: Request, {params}: {params: {id: string}}) {
 
     const json = await request.json();
 
-    const order = await prisma.order.create({
+    const createOrder = await prisma.order.create({
         data: {
             ...json,
-            restaurantId: params.id,
-            userId: currentUser.id,
-            items: {
-                create: json.items,
+            user: {
+                connect: {
+                    id: currentUser.id
+                }
             },
-            total: json.total,
+            restaurant: {
+                connect: {
+                    id: params.restaurantId
+                }
+            },
+            total: new Prisma.Decimal(json.total)
         }
-    })
+    });
 
-    return NextResponse.json(order);
+    return NextResponse.json(JSON.stringify(createOrder))
 }

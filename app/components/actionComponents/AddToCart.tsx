@@ -1,8 +1,7 @@
-
-
 import { getCurrentUser } from "@/app/actions/getCurrentUser";
 import { Prisma } from "@prisma/client";
 import prisma from "@/app/lib/prima";
+import { revalidatePath } from "next/cache";
 
 
 interface Props {
@@ -14,24 +13,152 @@ interface Props {
         description: string;
         image: string;
         price: string;
-    } | null
+    } | null;
+    restaurantId: string | undefined;
 }
 
-const AddToCart = async ({price, menuItem}: Props) => {
+const AddToCart = async ({price, menuItem, restaurantId, itemId}: Props) => {
     const user = await getCurrentUser();
     const userId = user?.id;
     async function addToCart(data: FormData) {
         "use server";
         const quantity = data.get("quantity");
-        const create = await prisma.cart.create({
-            data: {
-                total: new Prisma.Decimal(+price! * +quantity!),
+        let cartId = null;
+        const existingCart = await prisma.cart.findFirst({
+            where: {
                 userId: userId as string,
-            },
-            include: {
-                items: true,
             }
         });
+
+    
+
+        if(!existingCart) {
+            const cart = await prisma.cart.create({
+                data: {
+                    user: {
+                        connect: {
+                            id: userId as string,
+                        },
+                    },
+                    total: new Prisma.Decimal(Number(price) * Number(quantity)),
+                }
+            });
+            cartId = cart.id;
+        } else {
+            const currentTotal = existingCart.total;
+            const newTotal = new Prisma.Decimal(Number(currentTotal) + Number(price) * Number(quantity));
+
+            await prisma.cart.update({
+                where: {
+                    id: existingCart.id,
+                },
+                data: {
+                    total: newTotal,
+                }
+            });
+
+            cartId = existingCart.id;
+        }
+
+      
+
+        const order = await prisma.order.create({
+            data: {
+                user: {
+                    connect: {
+                        id: userId as string,
+                    }
+                },
+                total: new Prisma.Decimal(Number(price) * Number(quantity)),
+                restaurant: {
+                    connect: {
+                        id: restaurantId as string,
+                    }
+                }
+            }
+        });
+
+        if(order) {
+            const updatedOrder = await prisma.order.update({
+                where: {
+                    id: order.id,
+                },
+                data: {
+                    user: {
+                        connect: {
+                            id: userId as string,
+                        }
+                    },
+                    total: new Prisma.Decimal(Number(price) * Number(quantity)),
+                    restaurant: {
+                        connect: {
+                            id: restaurantId as string,
+                        }
+                    }
+                }
+            })
+        }
+
+        const orderId = order.id;
+
+        const orderItem = await prisma.cartItem.create({
+            data: {
+                cart: {
+                    connect: {
+                        id: cartId as string,
+                    }
+                },
+                order: {
+                    connect: {
+                        id: orderId as string,
+                    }
+                },
+                quantity: Number(quantity),
+                user: {
+                    connect: {
+                        id: userId as string,
+                    }
+                },
+                menuItem: {
+                    connect: {
+                        id: itemId as string,
+                    }
+                },
+            }
+        });
+
+        if(orderItem) {
+            const updatedOrderItem = await prisma.cartItem.update({
+                where: {
+                    id: orderItem.id,
+                },
+                data: {
+                    cart: {
+                        connect: {
+                            id: cartId as string,
+                        }
+                    },
+                    order: {
+                        connect: {
+                            id: orderId as string,
+                        }
+                    },
+                    quantity: Number(quantity),
+                    user: {
+                        connect: {
+                            id: userId as string,
+                        }
+                    },
+                    menuItem: {
+                        connect: {
+                            id: itemId as string,
+                        }
+                    },
+                }
+            })
+        }
+
+        revalidatePath("/cart");
     }
   return (
     <form

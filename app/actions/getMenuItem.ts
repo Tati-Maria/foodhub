@@ -16,8 +16,8 @@ export async function getMenuItem(
             },
             include: {
                 menu: {
-                    select: {
-                        restaurantId: true,
+                    include: {
+                        restaurant: true,
                     }
                 }
             }
@@ -30,7 +30,12 @@ export async function getMenuItem(
         return {
             ...menuItem,
             price: new Decimal(menuItem.price).toFixed(2),
-            menu: menuItem.menu.restaurantId,
+            menu: {
+                ...menuItem.menu,
+                restaurant: {
+                    ...menuItem.menu.restaurant,
+                }
+            },
         }
     } catch (error: any) {
         throw new Error(error.message);

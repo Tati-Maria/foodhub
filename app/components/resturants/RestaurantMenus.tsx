@@ -28,11 +28,13 @@ type ComponentProps = {
 };
 
 const RestaurantMenus = (
-  { menus}: ComponentProps,
+  { menus, restaurantId}: ComponentProps,
 ) => {
   
   return (
     <div>
+      <div>
+      </div>
       {menus?.map((menu) => (
         /* @ts-expect-error Async Component */
         <MenuCard
