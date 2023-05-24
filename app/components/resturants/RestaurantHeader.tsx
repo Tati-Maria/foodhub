@@ -1,10 +1,6 @@
-import {BsGlobe} from 'react-icons/bs';
-import {BiMessageDots} from 'react-icons/bi';
 import {IoCallOutline} from 'react-icons/io5';
 import {HiStar} from 'react-icons/hi';
 import {GrLocation} from 'react-icons/gr';
-import { IoWarningOutline } from 'react-icons/io5';
-import Link from 'next/link';
 import Image from 'next/image';
 
 
@@ -15,10 +11,8 @@ interface HeaderProps {
     priceRange: string | undefined;
     rating: number | undefined;
     address: string | undefined;
-    website: string | null | undefined;
     phone: string | undefined;
     description: string | undefined;
-    hours: string | undefined;
 }
 
 const RestaurantHeader = ({
@@ -27,9 +21,7 @@ const RestaurantHeader = ({
   priceRange,
   rating,
   address,
-  website,
   phone,
-  hours,
   description,
 }: HeaderProps) => {
   return (

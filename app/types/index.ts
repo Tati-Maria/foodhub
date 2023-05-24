@@ -118,3 +118,11 @@ export type SafeOrder = Omit<Order, "createdAt" | "updatedAt"> & {
     restaurantId: string;
     userId: string;
 }
+
+export type SafeOrderProps = {
+    id: string;
+    total: string;
+    restaurantId: string;
+    userId: string;
+    restaurant: string;
+}

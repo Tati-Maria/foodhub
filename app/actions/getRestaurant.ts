@@ -22,6 +22,7 @@ export async function getRestaurant(params: IParams) {
                         user: true,
                     }
                 },
+                orders: true,
             }
         });
 
@@ -41,6 +42,12 @@ export async function getRestaurant(params: IParams) {
                 restaurant: restaurant.id,
                 user: review.user.name 
             })),
+            orders: restaurant?.orders.map((order) => ({
+                ...order,
+                restaurant: restaurant.id,
+                total: order.total.toString(),
+            })),
+            
         };
 
         return serializedRestaurant;

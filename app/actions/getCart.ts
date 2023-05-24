@@ -8,12 +8,22 @@ export async function getCart() {
         return null;
     }
 
-    const getUserCart = await prisma.cart.findMany({
+    const getUserCart = await prisma.order.findMany({
         where: {
             userId: currentUser.id,
         },
         include: {
-            items: true,
+            items: {
+                include: {
+                    menuItem: true,
+                }
+            },
+            restaurant: {
+                select: {
+                    name: true,
+                    id: true,
+                }
+            }
         }
     });
 
@@ -21,5 +31,16 @@ export async function getCart() {
         return null;
     }
 
-    return getUserCart;
+   const serializedCart = getUserCart.map((cart) => ({
+        ...cart,
+        total: cart.total.toNumber(),
+        items: cart.items.map((item) => ({
+            ...item,
+            price: item.menuItem.price.toNumber() * item.quantity,
+            name: item.menuItem.name,
+            quantity: item.quantity,
+        })),
+   }));
+
+    return serializedCart;
 }

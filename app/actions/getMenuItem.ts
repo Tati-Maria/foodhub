@@ -29,7 +29,7 @@ export async function getMenuItem(
 
         return {
             ...menuItem,
-            price: new Decimal(menuItem.price).toFixed(2),
+            price: new Decimal(menuItem.price).toString(),
             menu: {
                 ...menuItem.menu,
                 restaurant: {

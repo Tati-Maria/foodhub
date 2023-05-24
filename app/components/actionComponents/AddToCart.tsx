@@ -176,7 +176,7 @@ const AddToCart = async ({price, menuItem, restaurantId, itemId}: Props) => {
         defaultValue={1} 
         />
         <button
-        className="w-max bg-red-500 text-white rounded-md p-2 hover:bg-red-700 transition duration-200 ease-in-out active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-red-200"
+        className="btn-primary"
         type="submit"
         >
             Add To Cart

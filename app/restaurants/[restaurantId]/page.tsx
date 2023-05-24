@@ -4,6 +4,8 @@ import RestaurantHeader from '@/app/components/resturants/RestaurantHeader';
 import RestaurantMenus from '@/app/components/resturants/RestaurantMenus';
 import RestaurantReview from '@/app/components/resturants/RestaurantReview';
 import NotFound from '@/app/components/ui/NotFound';
+import Article from '@/app/components/ui/Article';
+import Link from 'next/link';
 import React from 'react'
 
 interface IParams {
@@ -48,16 +50,28 @@ const Restaurant = async ({params}: {params: IParams}) => {
   return (
     <section>
         <RestaurantHeader
-        hours={resturant.hours} 
         image={resturant.image}
         name={resturant.name}
         priceRange={resturant.priceRange}
         rating={resturant.rating}
         address={resturant.address}
-        website={resturant.website}
         phone={resturant.phone}
         description={resturant.description}
         />
+        {/* Show orders if the current user is the owner of the restauran also disable button if there is no orders */}
+        {user?.id === resturant.ownerId && (
+        <>
+          <Article
+          className="my-4"
+          >
+          <Link 
+          className='btn-primary'
+          href={`/restaurants/${resturant.id}/orders`}>
+            See Orders
+          </Link>
+          </Article>
+        </>
+        )} 
         {menus?.length === 0 && (<NotFound text="Looks Like the owner has not added any menu yet 🥴" />)}
         <RestaurantMenus menus={menus} restaurantId={resturant.id} userID={user?.id} />
         <RestaurantReview reviews={reviews} user={user?.id} restaurantOwner={resturant.ownerId} restaurantId={resturant.id} />
