@@ -70,7 +70,11 @@ const Home = async () => {
         <tbody>
           {userRestaurants?.map((restaurant) => (
             <tr key={restaurant.id}>
-              <td data-label={restaurant.name} className="text-left">{restaurant.name}</td>
+              <td data-label={restaurant.name} className="text-left">
+                <Link href={`/restaurants/${restaurant.id}`}>
+                  {restaurant.name}
+                </Link>
+              </td>
               <td data-label="Menus" className="text-left">{restaurant.menus.length}</td>
               <td data-label="Items" className="text-left">{
                 restaurant.menus.reduce((acc, menu) => acc + menu.menuItems.length, 0)

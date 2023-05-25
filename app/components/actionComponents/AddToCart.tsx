@@ -2,6 +2,7 @@ import { getCurrentUser } from "@/app/actions/getCurrentUser";
 import { Prisma } from "@prisma/client";
 import prisma from "@/app/lib/prima";
 import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
 
 
 interface Props {
