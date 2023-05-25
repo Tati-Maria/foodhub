@@ -8,6 +8,7 @@ import Title from "../components/ui/Title";
 import Link from "next/link";
 import { getReviews } from "../actions/getReviews";
 import DeleteReview from "../components/actionComponents/DeleteReview";
+import { getUserOrders } from "../actions/getUserOrders";
 
 
 export const metadata = {
@@ -37,14 +38,14 @@ const Home = async () => {
   const user = await getCurrentUser();
   const userRestaurants = await getUserRestaurants();
   const reviews = await getReviews();
-  
+  const myOrders = await getUserOrders();
 
   //get current user reviews
   const currentUserReviews = reviews.filter(review => review.userId === user?.id);
 
 
   return (
-    <section>
+    <section className="space-y-10">
       <Article>
         <Title
         title={`Welcome ${user?.name}`} 
@@ -76,10 +77,10 @@ const Home = async () => {
               }</td>
               <td data-label="Orders" className="text-left">{restaurant.orders.length}</td>
               <td data-label="Reviews" className="text-left">{restaurant.reviews.length}</td>
-              <td data-label="Actions" className="text-left">
+              <td data-label="Actions" className="text-left flex items-center gap-4">
                 <DeleteRestaurant restaurantId={restaurant.id} />
                 <Link title="Edit Restaurant" href={`/restaurants/${restaurant.id}/edit`}>
-                  <FiEdit2 size={25} className="text-primary hover:text-primary/80" />
+                  <FiEdit2 size={20} className="text-primary hover:text-primary/80" />
                 </Link>
               </td>
             </tr>
@@ -110,7 +111,7 @@ const Home = async () => {
               <td data-label="Actions" className="text-left">
                 <DeleteReview reviewId={review.id} restaurantId={review.restaurantId} />
                 <Link title="Edit Review" href={`/restaurants/${review.restaurantId}/reviews/${review.id}/edit`}>
-                  <FiEdit2 size={25} className="text-primary hover:text-primary/80" />
+                  <FiEdit2 size={20} className="text-primary hover:text-primary/80" />
                 </Link>
               </td>
             </tr>
@@ -118,7 +119,30 @@ const Home = async () => {
         </tbody>
       </table>
       <div>
-        <Title title="Your Orders" />
+        <Title 
+        title="Your Past Orders"
+        className="mb-4 text-center" 
+        />
+        <table className="w-full">
+          <thead>
+            <tr>
+              <th className="text-left">Restaurant</th>
+              <th className="text-left">Items</th>
+              <th className="text-left">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {myOrders?.map((order) => (
+              <tr key={order.id}>
+                <td data-label={order.restaurant.name} className="text-left">{order.restaurant.name}</td>
+                <td data-label="Items" className="text-left">{
+                  order.items.reduce((acc, item) => acc + item.quantity, 0)
+                }</td>
+                <td data-label="Total" className="text-left">{order.total} €</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   )

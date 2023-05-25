@@ -47,7 +47,6 @@ const MenuItem = async(
             <AddToCart 
             itemId={menuItem?.id}
             price={menuItem?.price}
-            menuItem={menuItem}
             restaurantId={menuItem?.menu?.restaurantId}
             />
         </div>

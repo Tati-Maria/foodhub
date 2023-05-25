@@ -6,18 +6,11 @@ import { revalidatePath } from "next/cache";
 
 interface Props {
     itemId: string | undefined;
-    price: string | undefined;
-    menuItem: {
-        id: string;
-        name: string;
-        description: string;
-        image: string;
-        price: string;
-    } | null;
+    price: number | undefined;
     restaurantId: string | undefined;
 }
 
-const AddToCart = async ({price, menuItem, restaurantId, itemId}: Props) => {
+const AddToCart = async ({price, restaurantId, itemId}: Props) => {
     const user = await getCurrentUser();
     const userId = user?.id;
     async function addToCart(data: FormData) {

@@ -14,13 +14,12 @@ const DeleteRestaurant: React.FC<Props> = ({ restaurantId }) => {
                 id: restaurantId,
             },
         });
-        revalidateTag(`/restaurants/${restaurantId}`);
-        revalidatePath(`/restaurants`);
+        revalidatePath(`/profile`);
     }
 
     return (
         <form 
-        onSubmit={deleteRestaurant}
+        action={deleteRestaurant}
         >
             <input type="hidden" name="restaurantId" value={restaurantId} />
             <button

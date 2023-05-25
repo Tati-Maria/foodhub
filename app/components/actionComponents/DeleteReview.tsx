@@ -15,9 +15,7 @@ const DeleteReview = ({reviewId, restaurantId}: Props) => {
                 id: reviewId as string,
             }
         });
-
-        revalidatePath(`/restaurants/${restaurantId}`);
-        revalidateTag(`/restaurants/${restaurantId}/reviews`);
+        revalidatePath(`/profile`);
     }
 
     return (
