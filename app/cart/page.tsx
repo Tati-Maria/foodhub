@@ -18,12 +18,9 @@ const Cart = async () => {
     const user = await getCurrentUser();
 
     if (!user) {
-        return {
-            redirect: {
-            destination: '/login',
-            permanent: false,
-            },
-        }
+        return (
+            <div className="text-center opacity-30 text-3xl font-bold my-10">Please login to see your cart</div>
+        )
     }
     
 

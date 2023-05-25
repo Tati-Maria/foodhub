@@ -62,7 +62,7 @@ const MenuList = () => {
       <Button
       type="button"
       text="Sign Out"
-      onClick={() => signOut()}
+      onClick={() => signOut({callbackUrl: "/"})}
       className="text-red-500 w-full font-medium text-base md:text-lg px-2 py-1 rounded-md hover:bg-gray-100 hover:text-gray-950 transition duration-200 ease-in-out"
       />
     ) : (

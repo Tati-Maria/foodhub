@@ -1,3 +1,4 @@
+import DeleteItemCart from "../actionComponents/DeleteItemCart";
 import DeleteOrder from "../actionComponents/DeleteOrder";
 import Image from "next/image";
 
@@ -37,7 +38,6 @@ const OrderCard = ({total, user, orderId, items}: OrderCardProps) => {
         <div
         className="flex flex-col gap-4 flex-grow"
         >
-            <h3 className="font-bold text-primary">Order Id: #{orderId.substring(0, 5)}</h3>
             <div>
                 <h4
                 className="font-bold text-primary"
@@ -59,10 +59,10 @@ const OrderCard = ({total, user, orderId, items}: OrderCardProps) => {
                                 alt={item.menuItem.name}
                                 width={100}
                                 height={100}
-                                loading="lazy"
-                                className=""
+                                priority
                                 />
                             </div>
+                            <DeleteItemCart cartItemId={item.id} />
                         </li>
                     ))}
                 </ul>
