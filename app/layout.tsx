@@ -4,6 +4,7 @@ import './globals.css'
 import { Urbanist } from 'next/font/google'
 import Provider from './providers/provider'
 import Footer from './components/footer/Footer'
+import Cart from './components/nav/Cart'
 
 const urban = Urbanist({ subsets: ['latin'] })
 
@@ -31,6 +32,8 @@ export default function RootLayout({
         <Provider>
           <Container>
             <NavBar />
+            {/* @ts-expect-error  */}
+            <Cart />
             <main
             className='min-h-screen py-10 relative'
             >

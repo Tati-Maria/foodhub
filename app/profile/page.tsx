@@ -1,11 +1,13 @@
 import { getCurrentUser } from "../actions/getCurrentUser";
 import { getUserRestaurants } from "../actions/getUserRestaurants";
-import Grid from "../components/containers/Grid";
-import RestaurantCard from "../components/resturants/RestaurantCard";
+import DeleteRestaurant from "../components/actionComponents/DeleteRestaurant";
+import {FiEdit2} from "react-icons/fi";
 import Article from "../components/ui/Article";
 import TextView from "../components/ui/TextView";
 import Title from "../components/ui/Title";
 import Link from "next/link";
+import { getReviews } from "../actions/getReviews";
+import DeleteReview from "../components/actionComponents/DeleteReview";
 
 
 export const metadata = {
@@ -34,6 +36,12 @@ const NoRestaurants = () => {
 const Home = async () => {
   const user = await getCurrentUser();
   const userRestaurants = await getUserRestaurants();
+  const reviews = await getReviews();
+  
+
+  //get current user reviews
+  const currentUserReviews = reviews.filter(review => review.userId === user?.id);
+
 
   return (
     <section>
@@ -47,19 +55,71 @@ const Home = async () => {
         />
       </Article>
       {userRestaurants?.length === 0 && <NoRestaurants />}
-      <Grid
-      className="py-10"
-      >
-        {userRestaurants?.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-        ))}
-      </Grid>
+      <table className="w-full">
+        <thead>
+          <tr>
+            <th className="text-left">Name</th>
+            <th className="text-left">Menus</th>
+            <th className="text-left">Items</th>
+            <th className="text-left">Orders</th>
+            <th className="text-left">Reviews</th>
+            <th className="text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userRestaurants?.map((restaurant) => (
+            <tr key={restaurant.id}>
+              <td data-label={restaurant.name} className="text-left">{restaurant.name}</td>
+              <td data-label="Menus" className="text-left">{restaurant.menus.length}</td>
+              <td data-label="Items" className="text-left">{
+                restaurant.menus.reduce((acc, menu) => acc + menu.menuItems.length, 0)
+              }</td>
+              <td data-label="Orders" className="text-left">{restaurant.orders.length}</td>
+              <td data-label="Reviews" className="text-left">{restaurant.reviews.length}</td>
+              <td data-label="Actions" className="text-left">
+                <DeleteRestaurant restaurantId={restaurant.id} />
+                <Link title="Edit Restaurant" href={`/restaurants/${restaurant.id}/edit`}>
+                  <FiEdit2 size={25} className="text-primary hover:text-primary/80" />
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <Article
       >
         <Title
         title="Your Reviews"
         />
       </Article>
+      <table className="w-full">
+        <thead>
+          <tr>
+            <th className="text-left">Restaurant</th>
+            <th className="text-left">Rating</th>
+            <th className="text-left">Comment</th>
+            <th className="text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentUserReviews?.map((review) => (
+            <tr key={review.id}>
+              <td data-label={review.restaurant.name} className="text-left">{review.restaurant.name}</td>
+              <td data-label="Rating" className="text-left">{review.rating}</td>
+              <td data-label="Comment" className="text-left">{review.body}</td>
+              <td data-label="Actions" className="text-left">
+                <DeleteReview reviewId={review.id} restaurantId={review.restaurantId} />
+                <Link title="Edit Review" href={`/restaurants/${review.restaurantId}/reviews/${review.id}/edit`}>
+                  <FiEdit2 size={25} className="text-primary hover:text-primary/80" />
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div>
+        <Title title="Your Orders" />
+      </div>
     </section>
   )
 }

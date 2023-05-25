@@ -1,5 +1,4 @@
 import prisma from "../lib/prima";
-import Decimal from "decimal.js/decimal"
 
 interface IParams {
     menuItemId: string;
@@ -29,7 +28,7 @@ export async function getMenuItem(
 
         return {
             ...menuItem,
-            price: new Decimal(menuItem.price).toString(),
+            price: menuItem.price.toNumber(),
             menu: {
                 ...menuItem.menu,
                 restaurant: {

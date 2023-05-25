@@ -13,7 +13,10 @@ export async function getReviews() {
 
     const serializedReviews = reviews.map((review) => ({
         ...review,
-        restaurant: review.restaurant.id,
+        restaurant: {
+            ...review.restaurant,
+            name: review.restaurant.name,
+        },
         user: review.user.id,
     }));
 

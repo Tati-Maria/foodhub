@@ -20,6 +20,7 @@ export async function getRestaurants() {
         })),
         orders: restaurant.orders.map((order) => ({
             ...order,
+            total: order.total.toNumber(),
             restaurant: restaurant.id,
         })),
         owner: restaurant.owner.id,

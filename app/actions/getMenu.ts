@@ -23,7 +23,14 @@ export async function getMenu(params: IParams) {
             return null;
         }
 
-        return menu
+        return {
+            ...menu,
+            menuItems: menu.menuItems.map((menuItem) => ({
+                ...menuItem,
+                price: menuItem.price.toNumber(),
+                menu: menu.id,
+            })),
+        }
     } catch (error: any) {
         throw new Error(error.message);
     }

@@ -9,9 +9,9 @@ const options: Options = {
     perPage: 4,
     gap: "1rem",
     breakpoints: {
-        768: {
+        1024: {
             //tablet
-            perPage: 3,
+            perPage: 2,
             gap: "1rem"
         },
         568: {
@@ -23,6 +23,10 @@ const options: Options = {
             //mobile portrait
             perPage: 1,
             gap: "20px"
+        },
+        1200: {
+            //desktop
+            perPage: 4,
         }
     },
     arrows: true,

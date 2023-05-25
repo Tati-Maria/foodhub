@@ -22,6 +22,11 @@ const AddToCart = async ({price, menuItem, restaurantId, itemId}: Props) => {
     const userId = user?.id;
     async function addToCart(data: FormData) {
         "use server";
+        if(!user && !userId) {
+            return {
+                error: "You must be logged in to add items to your cart",
+            }
+        }
         const quantity = data.get("quantity");
         let cartId = null;
         const existingCart = await prisma.cart.findFirst({

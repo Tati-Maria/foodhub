@@ -9,9 +9,9 @@ This is a food ordering website where users can order food from different restau
 - Users can search for restaurants.
 - Users can leave a review for a restaurant.
 - Users can create an account and login to the website using Google, Facebook or Github.
-- Users can view different food items and add them to their cart.(soon to be implemented)
-- Users can view their cart and update the quantity of food items(soon to be implemented)
-- Users can view their order details.(soon to be implemented)
+- Users can view different food items and add them to their cart.
+- Users can view their cart and remove items from their cart.
+- Restaurant owner can see all the orders placed for their restaurant.
 - Users can pay for their order using Stripe.(soon to be implemented)
   
 ## Tech Stack

@@ -58,6 +58,7 @@ const MenuItem = async(
             width={500}
             height={300}
             loading="lazy"
+            className="aspect-auto w-auto h-auto"
             />
         </figure>
     </div>

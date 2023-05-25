@@ -14,7 +14,15 @@ export async function getUserRestaurants() {
             ownerId: currentUser.id,
         },
         include: {
-            menus: true,
+            menus: {
+                include: {
+                    menuItems: {
+                        select: {
+                            id: true,
+                        }
+                    },
+                }
+            },
             orders: true,
             owner: true,
             reviews: {
@@ -33,9 +41,14 @@ export async function getUserRestaurants() {
         menus: restaurant.menus.map((menu) => ({
             ...menu,
             restaurant: restaurant.id,
+            menuItems: menu.menuItems.map((menuItem) => ({
+                ...menuItem,
+                menu: menu.id,
+            })),
         })),
         orders: restaurant.orders.map((order) => ({
             ...order,
+            total: order.total.toNumber(),
             restaurant: restaurant.id,
         })),
         owner: restaurant.owner.id,
