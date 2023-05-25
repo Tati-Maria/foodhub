@@ -2,11 +2,13 @@ import { getCurrentUser } from "../actions/getCurrentUser";
 import { getUserRestaurants } from "../actions/getUserRestaurants";
 import DeleteRestaurant from "../components/actionComponents/DeleteRestaurant";
 import {FiEdit2} from "react-icons/fi";
+import {RiRestaurant2Fill} from "react-icons/ri";
 import Article from "../components/ui/Article";
 import TextView from "../components/ui/TextView";
 import Title from "../components/ui/Title";
 import Link from "next/link";
 import { getReviews } from "../actions/getReviews";
+import {IoAddCircleSharp} from "react-icons/io5";
 import DeleteReview from "../components/actionComponents/DeleteReview";
 import { getUserOrders } from "../actions/getUserOrders";
 
@@ -24,12 +26,6 @@ const NoRestaurants = () => {
       <h2>
           You have no restaurants.
       </h2>
-      <Link 
-      href="/restaurants/new"
-      className="text-primary font-bold hover:underline text-xl px-4 py-2 border border-primary rounded-md mt-6 inline-block"
-      >
-        Create a restaurant
-      </Link>
     </div>
   )
 }
@@ -46,14 +42,27 @@ const Home = async () => {
 
   return (
     <section className="space-y-10">
-      <Article>
-        <Title
-        title={`Welcome ${user?.name}`} 
-        />
-        <TextView
-        className="text-gray-500"
-        text="Manage your restaurants and orders" 
-        />
+      <Article
+      className="flex justify-between items-center space-x-4"
+      >
+        <div>
+          <Title
+          title={`Welcome ${user?.name}`} 
+          />
+          <TextView
+          className="text-gray-500"
+          text="Manage your restaurants and orders" 
+          />
+        </div>
+        <div>
+        <Link
+        title="Create a restaurant" 
+        href="/restaurants/new"
+        className="btn-primary"
+        >
+        Create a restaurant <RiRestaurant2Fill size={20} className="inline-block ml-2" />
+      </Link>
+        </div>
       </Article>
       {userRestaurants?.length === 0 && <NoRestaurants />}
       <table className="w-full">
@@ -85,6 +94,9 @@ const Home = async () => {
                 <DeleteRestaurant restaurantId={restaurant.id} />
                 <Link title="Edit Restaurant" href={`/restaurants/${restaurant.id}/edit`}>
                   <FiEdit2 size={20} className="text-primary hover:text-primary/80" />
+                </Link>
+                <Link title="Add Menu" href={`/restaurants/${restaurant.id}/menus/new`}>
+                  <IoAddCircleSharp size={20} className="text-blue-500 hover:text-blue-600 active:text-blue-600 focus:text-blue-600 focus-visible:text-blue-600" />
                 </Link>
               </td>
             </tr>
@@ -148,6 +160,7 @@ const Home = async () => {
           </tbody>
         </table>
       </div>
+      
     </section>
   )
 }

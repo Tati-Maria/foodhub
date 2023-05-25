@@ -58,21 +58,16 @@ const Restaurant = async ({params}: {params: IParams}) => {
         phone={resturant.phone}
         description={resturant.description}
         />
-        {/* Show orders if the current user is the owner of the restauran also disable button if there is no orders */}
-        {user?.id === resturant.ownerId && (
-        <>
-          <Article
-          className="my-4"
-          >
-          <Link 
-          className='btn-primary'
-          href={`/restaurants/${resturant.id}/orders`}>
-            See Orders
-          </Link>
+        {menus?.length === 0 && (
+          <Article>
+            <NotFound text="Looks Like the owner has not added any menu yet 🥴" />
+            {user?.id === resturant.ownerId && (
+              <Link href={`/restaurants/${resturant.id}/menus/new`}>
+                Add Menu
+              </Link>
+            )}
           </Article>
-        </>
-        )} 
-        {menus?.length === 0 && (<NotFound text="Looks Like the owner has not added any menu yet 🥴" />)}
+        )}
         <RestaurantMenus menus={menus} restaurantId={resturant.id} userID={user?.id} />
         <RestaurantReview reviews={reviews} user={user?.id} restaurantOwner={resturant.ownerId} restaurantId={resturant.id} />
     </section>
