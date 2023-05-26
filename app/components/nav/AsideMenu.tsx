@@ -10,8 +10,15 @@ const AsideMenu = () => {
     const {open, closeSideBar} = useSideBar();
 
   return (
-    <aside
-    className={`aside ${open ? 'active' : ''} py-4 px-2 md:px-4`}
+    <div
+    className={`
+    fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 ease-in-out transition-all duration-300 transform ${open ? 'translate-x-0' : '-translate-x-full'}
+    `}
+    >
+      <aside
+    className={`
+    fixed top-0 left-0 w-[250px] p-2 h-full bg-primary overflow-y-auto ease-in-out transition-all duration-300 transform ${open ? 'translate-x-0' : '-translate-x-full'}
+    `}
     >
         <div
         className="flex justify-between items-center py-2"
@@ -28,6 +35,7 @@ const AsideMenu = () => {
         </div>
         <MenuList />
     </aside>
+    </div>
   )
 }
 

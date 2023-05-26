@@ -15,6 +15,7 @@ const NavBar = () => {
     className="flex items-center justify-between py-6"
     >
         <Logo 
+        icon="text-primary"
         />
         <div
         className="flex items-center"

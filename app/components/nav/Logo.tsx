@@ -18,7 +18,7 @@ const Logo = ({className, icon}: Props) => {
     className={`flex items-center justify-center space-x-2`}
     >
         <MdFastfood
-        className={`text-3xl text-primary ${icon}`} 
+        className={`text-3xl ${icon}`} 
         />
         <span
         className={`text-2xl font-bold text-white ${darker} md:text-3xl ${className}`}

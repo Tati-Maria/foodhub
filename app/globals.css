@@ -30,7 +30,7 @@
 }
 
 table {
-    @apply border-collapse border border-gray-300;
+    @apply border-collapse border border-gray-300 relative z-0;
 }
 
 th, td {

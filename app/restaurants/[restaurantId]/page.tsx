@@ -7,6 +7,7 @@ import NotFound from '@/app/components/ui/NotFound';
 import Article from '@/app/components/ui/Article';
 import Link from 'next/link';
 import React from 'react'
+import RestaurantFooter from '@/app/components/resturants/RestaurantFooter';
 
 interface IParams {
     restaurantId: string
@@ -70,6 +71,7 @@ const Restaurant = async ({params}: {params: IParams}) => {
         )}
         <RestaurantMenus menus={menus} restaurantId={resturant.id} userID={user?.id} />
         <RestaurantReview reviews={reviews} user={user?.id} restaurantOwner={resturant.ownerId} restaurantId={resturant.id} />
+        <RestaurantFooter website={resturant.website} hours={resturant.hours} />
     </section>
   )
 }

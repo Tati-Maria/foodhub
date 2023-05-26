@@ -6,6 +6,7 @@ export async function getRestaurants() {
             menus: true,
             orders: true,
             owner: true,
+            reviews: true,
         },
         orderBy: {
             name: "asc",
@@ -24,6 +25,10 @@ export async function getRestaurants() {
             restaurant: restaurant.id,
         })),
         owner: restaurant.owner.id,
+        reviews: restaurant.reviews.map((review) => ({
+            ...review,
+            rating: restaurant.reviews.reduce((acc, review) => acc + review.rating, 0) / restaurant.reviews.length, 
+        })),
     }));
 
     return serializedRestaurants;

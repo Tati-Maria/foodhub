@@ -19,9 +19,12 @@ interface RestaurantCardProps {
         hours: string;
         ownerId: string;
     }
+
 }
 
 const RestaurantCard = ({restaurant}: RestaurantCardProps) => {
+
+    
 
   return (
     <div

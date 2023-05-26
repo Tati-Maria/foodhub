@@ -18,6 +18,7 @@ const RestaurantFilter = ({restaurants}: IRestaurantFilter) => {
     const [minPrice, setMinPrice] = useState("$");
     const [minRating, setMinRating] = useState(0);
 
+    
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -38,12 +39,13 @@ const RestaurantFilter = ({restaurants}: IRestaurantFilter) => {
     }, [ restaurants, search]);
 
     useEffect(() => {
-        const debouce = setTimeout(() => {
+        const debounce = setTimeout(() => {
             filteredRestaurants(minPrice, maxPrice, minRating);
         }, 500);
 
-        return () => clearTimeout(debouce);
+        return () => clearTimeout(debounce);
     }, [filteredRestaurants, minPrice, maxPrice, minRating]);
+
 
 
   return (
@@ -140,7 +142,10 @@ const RestaurantFilter = ({restaurants}: IRestaurantFilter) => {
          className="py-10"
         >
             {filterRestaurants.map((restaurant) => (
-                <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+                <RestaurantCard 
+                key={restaurant.id} 
+                restaurant={restaurant}
+                />
             ))}
         </Grid>
     </section>

@@ -43,7 +43,7 @@ const Home = async () => {
   return (
     <section className="space-y-10">
       <Article
-      className="flex justify-between items-center space-x-4"
+      className="space-y-4"
       >
         <div>
           <Title
@@ -64,19 +64,30 @@ const Home = async () => {
       </Link>
         </div>
       </Article>
-      {userRestaurants?.length === 0 && <NoRestaurants />}
+  
       <table className="w-full">
         <thead>
           <tr>
             <th className="text-left">Name</th>
             <th className="text-left">Menus</th>
-            <th className="text-left">Items</th>
-            <th className="text-left">Orders</th>
-            <th className="text-left">Reviews</th>
+            <th className="text-left">Nº Items</th>
+            <th className="text-left">Nº Orders</th>
+            <th className="text-left">Nº Reviews</th>
+            <th className="text-left">Av Rating</th>
             <th className="text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
+          {/* If there is no restaurants */}
+          {userRestaurants?.length === 0 && (
+            <tr>
+              <td colSpan={6}>
+                <NoRestaurants 
+                />
+              </td>
+            </tr>
+          )}
+          {/* If there are restaurants */}
           {userRestaurants?.map((restaurant) => (
             <tr key={restaurant.id}>
               <td data-label={restaurant.name} className="text-left">
@@ -90,6 +101,7 @@ const Home = async () => {
               }</td>
               <td data-label="Orders" className="text-left">{restaurant.orders.length}</td>
               <td data-label="Reviews" className="text-left">{restaurant.reviews.length}</td>
+              <td data-label="Ratings" className="text-left">{restaurant.reviews.reduce((acc, review) => acc + review.rating, 0)}</td>
               <td data-label="Actions" className="text-left flex items-center gap-4">
                 <DeleteRestaurant restaurantId={restaurant.id} />
                 <Link title="Edit Restaurant" href={`/restaurants/${restaurant.id}/edit`}>
@@ -106,7 +118,7 @@ const Home = async () => {
       <Article
       >
         <Title
-        title="Your Reviews"
+        title="Reviews you have made"
         />
       </Article>
       <table className="w-full">
@@ -119,6 +131,15 @@ const Home = async () => {
           </tr>
         </thead>
         <tbody>
+          {currentUserReviews?.length === 0 && (
+            <tr>
+              <td colSpan={4} className="text-center text-gray-500 my-10 text-xl">
+                <h2>
+                  You have no reviews.
+                </h2>
+              </td>
+            </tr>
+          )}
           {currentUserReviews?.map((review) => (
             <tr key={review.id}>
               <td data-label={review.restaurant.name} className="text-left">{review.restaurant.name}</td>
@@ -152,7 +173,7 @@ const Home = async () => {
               <tr key={order.id}>
                 <td data-label={order.restaurant.name} className="text-left">{order.restaurant.name}</td>
                 <td data-label="Items" className="text-left">{
-                  order.items.reduce((acc, item) => acc + item.quantity, 0)
+                  order.items.map(item => item.quantity).reduce((acc, quantity) => acc + quantity, 0)
                 }</td>
                 <td data-label="Total" className="text-left">{order.total} €</td>
               </tr>
