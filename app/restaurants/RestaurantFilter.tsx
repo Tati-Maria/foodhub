@@ -5,7 +5,7 @@
 import { useState, useEffect, useCallback} from "react";
 import { SafeRestaurantProps } from "../types";
 import Grid from "../components/containers/Grid";
-import RestaurantCard from "../components/resturants/RestaurantCard";
+import RestaurantCard from "../components/restaurant/RestaurantCard";
 
 interface IRestaurantFilter {
     restaurants: SafeRestaurantProps[];

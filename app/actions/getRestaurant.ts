@@ -47,7 +47,6 @@ export async function getRestaurant(params: IParams) {
                 restaurant: restaurant.id,
                 total: order.total.toString(),
             })),
-            
         };
 
         return serializedRestaurant;

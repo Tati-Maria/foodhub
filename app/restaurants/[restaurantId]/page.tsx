@@ -1,13 +1,13 @@
 import { getCurrentUser } from '@/app/actions/getCurrentUser';
 import { getRestaurant } from '@/app/actions/getRestaurant'
-import RestaurantHeader from '@/app/components/resturants/RestaurantHeader';
-import RestaurantMenus from '@/app/components/resturants/RestaurantMenus';
-import RestaurantReview from '@/app/components/resturants/RestaurantReview';
+import RestaurantHeader from '@/app/components/restaurant/RestaurantHeader';
+import RestaurantMenus from '@/app/components/restaurant/RestaurantMenus';
+import RestaurantReview from '@/app/components/restaurant/RestaurantReview';
 import NotFound from '@/app/components/ui/NotFound';
 import Article from '@/app/components/ui/Article';
 import Link from 'next/link';
 import React from 'react'
-import RestaurantFooter from '@/app/components/resturants/RestaurantFooter';
+import RestaurantFooter from '@/app/components/restaurant/RestaurantFooter';
 
 interface IParams {
     restaurantId: string
@@ -47,6 +47,14 @@ const Restaurant = async ({params}: {params: IParams}) => {
     </section>
   )
 
+  const calcRating = (rating: number | undefined) => {
+    const restaurantReviews = reviews!.filter(review => review.restaurantId === resturant.id);
+    const totalReviews = restaurantReviews.length;
+    const totalRating = restaurantReviews.reduce((acc, review) => acc + review.rating, 0);
+    const averageRating = totalRating / totalReviews;
+
+    return averageRating;
+    }
 
   return (
     <section>
@@ -54,7 +62,7 @@ const Restaurant = async ({params}: {params: IParams}) => {
         image={resturant.image}
         name={resturant.name}
         priceRange={resturant.priceRange}
-        rating={resturant.rating}
+        rating={calcRating(resturant.rating)}
         address={resturant.address}
         phone={resturant.phone}
         description={resturant.description}

@@ -2,7 +2,7 @@
 import { SafeRestaurant, SafeRestaurantProps } from "@/app/types";
 import {Options, Splide, SplideSlide} from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
-import RestaurantCard from "../resturants/RestaurantCard";
+import RestaurantCard from "../restaurant/RestaurantCard";
 
 const options: Options = {
     pagination: false,

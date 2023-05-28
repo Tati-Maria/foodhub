@@ -143,7 +143,7 @@ const Home = async () => {
           {currentUserReviews?.map((review) => (
             <tr key={review.id}>
               <td data-label={review.restaurant.name} className="text-left">{review.restaurant.name}</td>
-              <td data-label="Rating" className="text-left">{review.rating}</td>
+              <td data-label="Rating" className="text-left">{review.body}</td>
               <td data-label="Comment" className="text-left">{review.body}</td>
               <td data-label="Actions" className="text-left">
                 <DeleteReview reviewId={review.id} restaurantId={review.restaurantId} />
@@ -164,7 +164,6 @@ const Home = async () => {
           <thead>
             <tr>
               <th className="text-left">Restaurant</th>
-              <th className="text-left">Items</th>
               <th className="text-left">Total</th>
             </tr>
           </thead>
@@ -172,9 +171,6 @@ const Home = async () => {
             {myOrders?.map((order) => (
               <tr key={order.id}>
                 <td data-label={order.restaurant.name} className="text-left">{order.restaurant.name}</td>
-                <td data-label="Items" className="text-left">{
-                  order.items.map(item => item.quantity).reduce((acc, quantity) => acc + quantity, 0)
-                }</td>
                 <td data-label="Total" className="text-left">{order.total} €</td>
               </tr>
             ))}

@@ -24,8 +24,6 @@ interface RestaurantCardProps {
 
 const RestaurantCard = ({restaurant}: RestaurantCardProps) => {
 
-    
-
   return (
     <div
     className="rounded-md p-6 hover:shadow-md transition duration-200 ease-in-out bg-[#02001b]/50"
@@ -54,12 +52,7 @@ const RestaurantCard = ({restaurant}: RestaurantCardProps) => {
                     <span>
                         {restaurant.priceRange} •
                     </span>
-                    <span
-                    className="flex items-center"
-                    >
-                        <FaStar  className="text-yellow-500 mr-1" />
-                        {restaurant.rating} •
-                    </span>
+                    <FaStar  className="text-yellow-500 mr-1" />
                     <span>
                         <VscVerified size={20} className="text-green-500" />
                     </span>
