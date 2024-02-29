@@ -46,7 +46,3 @@ Start the server
 ```bash
   npm run dev
 ```
-
-## Project Status
-
-The project is currently in development. Users can search for restaurants and leave a review for a restaurant. The next steps are to implement the cart functionality and payment functionality.
